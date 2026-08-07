@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="ringGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1B5E20"/>
+      <stop offset="100%" stop-color="#66BB6A"/>
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2E7D32"/>
+      <stop offset="100%" stop-color="#66BB6A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fundo -->
+  
+
+  <!-- Anel incompleto -->
+  <circle cx="256" cy="266" r="168" fill="none" stroke="url(#ringGrad)"
+    stroke-width="30" stroke-linecap="round"
+    stroke-dasharray="792 264" transform="rotate(-52 256 266)"/>
+
+  <!-- Barras ascendentes -->
+  <rect x="176" y="300" width="42" height="108" rx="10" fill="#66BB6A"/>
+  <rect x="237" y="256" width="42" height="152" rx="10" fill="#2E7D32"/>
+  <rect x="298" y="204" width="42" height="204" rx="10" fill="#1B5E20"/>
+
+  <!-- Seta ascendente com pontos -->
+  <polyline points="164,318 262,214 366,124" fill="none" stroke="url(#arrowGrad)"
+    stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="366,124 320,132 358,166" fill="#66BB6A"/>
+  <circle cx="164" cy="318" r="13" fill="#1B5E20"/>
+  <circle cx="262" cy="214" r="13" fill="#2E7D32"/>
+  <circle cx="366" cy="124" r="13" fill="#66BB6A"/>
+</svg>
