@@ -1848,25 +1848,246 @@ body.dark .stat-card:hover {
  #login-screen {
  position: fixed;
  inset: 0;
- background: var(--bg);
+ background:
+ radial-gradient(circle at 50% 0%, rgba(76, 214, 113, .10) 0%, rgba(76, 214, 113, 0) 45%),
+ linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px),
+ linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px),
+ #05080a;
+ background-size: auto, 42px 42px, 42px 42px, auto;
  z-index: 9999;
  display: flex;
  align-items: center;
- justify-content: center
+ justify-content: center;
+ overflow-y: auto;
+ padding: 40px 16px
  }
 
  #login-screen.hidden {
  display: none
  }
 
- .login-box {
- background: #fff;
- border-radius: 20px;
- padding: 48px 40px;
- box-shadow: 0 8px 40px rgba(0, 0, 0, .12);
+ .landing-wrap {
+ max-width: 440px;
+ width: 100%;
+ margin: auto;
+ padding: 0 0 24px;
+ border-radius: 22px;
+ overflow: hidden;
+ box-shadow: 0 24px 70px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .06);
+ background: #05080a
+ }
+
+ .landing-hero {
+ position: relative;
+ background: radial-gradient(120% 100% at 50% 0%, #0f2117 0%, #081210 55%, #05080a 100%);
+ padding: 52px 28px 34px;
  text-align: center;
- max-width: 380px;
- width: 90%
+ overflow: hidden;
+ border-bottom: 1px solid rgba(76, 214, 113, .14)
+ }
+
+ .landing-glow {
+ position: absolute;
+ top: -120px;
+ left: 50%;
+ transform: translateX(-50%);
+ width: 340px;
+ height: 340px;
+ background: radial-gradient(circle, rgba(76, 214, 113, .28) 0%, rgba(76, 214, 113, 0) 70%);
+ pointer-events: none
+ }
+
+ .landing-mark {
+ position: relative;
+ width: 46px;
+ height: 46px;
+ margin: 0 auto 14px;
+ opacity: 0;
+ animation: landFadeUp .6s ease-out .1s forwards
+ }
+
+ .landing-mark img {
+ width: 100%;
+ height: 100%;
+ object-fit: contain;
+ filter: drop-shadow(0 0 18px rgba(76, 214, 113, .35))
+ }
+
+ .landing-title {
+ position: relative;
+ font-size: 30px;
+ font-weight: 800;
+ letter-spacing: -.5px;
+ color: #f5f7f5;
+ opacity: 0;
+ animation: landFadeUp .6s ease-out .18s forwards
+ }
+
+ .landing-title-accent {
+ background: linear-gradient(90deg, #4CD671, #8ef0a8);
+ -webkit-background-clip: text;
+ background-clip: text;
+ color: transparent
+ }
+
+ .landing-tag {
+ position: relative;
+ font-size: 11px;
+ font-weight: 600;
+ color: rgba(245, 247, 245, .45);
+ text-transform: uppercase;
+ letter-spacing: 2px;
+ margin-top: 6px;
+ opacity: 0;
+ animation: landFadeUp .6s ease-out .24s forwards
+ }
+
+ .landing-dot {
+ color: #4CD671;
+ margin: 0 6px
+ }
+
+ .landing-sub {
+ position: relative;
+ font-size: 14.5px;
+ line-height: 1.5;
+ color: rgba(245, 247, 245, .68);
+ max-width: 320px;
+ margin: 16px auto 0;
+ opacity: 0;
+ animation: landFadeUp .6s ease-out .3s forwards
+ }
+
+ .landing-chart {
+ position: relative;
+ width: 100%;
+ height: 90px;
+ margin-top: 28px;
+ display: block;
+ opacity: 0;
+ animation: landFadeUp .6s ease-out .36s forwards
+ }
+
+ .landing-chart-base {
+ stroke: rgba(245, 247, 245, .1);
+ stroke-width: 1;
+ stroke-dasharray: 2 5
+ }
+
+ .landing-chart-fill {
+ opacity: 0;
+ animation: landFillIn .8s ease-out 1.1s forwards
+ }
+
+ .landing-chart-line {
+ stroke-dasharray: 100;
+ stroke-dashoffset: 100;
+ animation: landDraw 1.3s cubic-bezier(.4, 0, .2, 1) .5s forwards
+ }
+
+ .landing-chart-dot {
+ fill: #66E38A;
+ opacity: 0;
+ transform-origin: 400px 10px;
+ animation: landDotIn .4s ease-out 1.7s forwards, landPulse 2.2s ease-in-out 2.1s infinite
+ }
+
+ @keyframes landFadeUp {
+ from { opacity: 0; transform: translateY(10px) }
+ to { opacity: 1; transform: translateY(0) }
+ }
+
+ @keyframes landDraw {
+ to { stroke-dashoffset: 0 }
+ }
+
+ @keyframes landFillIn {
+ to { opacity: 1 }
+ }
+
+ @keyframes landDotIn {
+ to { opacity: 1; transform: scale(1) }
+ }
+
+ @keyframes landPulse {
+ 0%, 100% { filter: drop-shadow(0 0 0 rgba(102, 227, 138, .6)) }
+ 50% { filter: drop-shadow(0 0 6px rgba(102, 227, 138, .9)) }
+ }
+
+ .landing-features {
+ display: flex;
+ flex-direction: column;
+ gap: 1px;
+ background: rgba(255, 255, 255, .06);
+ margin: 0 20px;
+ border-radius: 14px;
+ overflow: hidden;
+ transform: translateY(16px);
+ opacity: 0;
+ animation: landFadeUp .6s ease-out .55s forwards
+ }
+
+ .landing-feat {
+ background: #0b0f0d;
+ padding: 16px 18px;
+ display: flex;
+ align-items: center;
+ gap: 14px
+ }
+
+ .landing-feat-ico {
+ flex-shrink: 0;
+ width: 38px;
+ height: 38px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ border-radius: 10px;
+ background: rgba(76, 214, 113, .1);
+ color: #66E38A
+ }
+
+ .landing-feat-ico svg {
+ width: 18px;
+ height: 18px
+ }
+
+ .landing-feat-txt {
+ display: flex;
+ flex-direction: column;
+ gap: 2px;
+ text-align: left
+ }
+
+ .landing-feat-txt strong {
+ font-size: 13.5px;
+ font-weight: 700;
+ color: #f5f7f5
+ }
+
+ .landing-feat-txt span {
+ font-size: 12px;
+ color: rgba(245, 247, 245, .5);
+ line-height: 1.4
+ }
+
+ .login-box {
+ margin: 22px 20px 0;
+ background: transparent;
+ padding: 0;
+ opacity: 0;
+ animation: landFadeUp .6s ease-out .7s forwards
+ }
+
+ @media (prefers-reduced-motion: reduce) {
+ .landing-mark, .landing-title, .landing-tag, .landing-sub, .landing-chart, .landing-features, .login-box {
+ animation: none !important;
+ opacity: 1 !important;
+ transform: none !important
+ }
+ .landing-chart-line { stroke-dashoffset: 0 }
+ .landing-chart-fill { opacity: 1 }
+ .landing-chart-dot { opacity: 1; transform: scale(1) }
  }
 
  .icon-box {
@@ -1963,22 +2184,14 @@ body.dark .stat-card:hover {
 
  .login-status {
  font-size: 12px;
- color: var(--text-l);
- margin-top: 16px;
- min-height: 18px
+ color: rgba(245, 247, 245, .5);
+ margin-top: 14px;
+ min-height: 18px;
+ text-align: center
  }
 
  body.dark #login-screen {
- background: #0E1113
- }
-
- body.dark .login-box {
- background: #1e1e1e;
- border: 1px solid #333
- }
-
- body.dark .login-title {
- color: #e0e0e0
+ background: #05080a
  }
 
  body.dark .login-btn {
@@ -3140,18 +3353,55 @@ body.dark .stat-card:hover {
 
 <body>
 
- <!-- TELA DE LOGIN -->
+ <!-- TELA DE APRESENTAÇÃO / LOGIN -->
  <div id="login-screen">
+ <div class="landing-wrap">
+ <div class="landing-hero">
+ <div class="landing-glow"></div>
+ <div class="landing-mark">
+ <img src="icon-transparent.svg" alt="">
+ </div>
+ <div class="landing-title">Controle<span class="landing-title-accent">Aí</span></div>
+ <div class="landing-tag">Organize<span class="landing-dot">·</span>Analise<span class="landing-dot">·</span>Cresça</div>
+ <div class="landing-sub">O painel completo das suas finanças: contas, rendimentos e financiamentos, num só lugar.</div>
+ <svg class="landing-chart" viewBox="0 0 400 130" preserveAspectRatio="none" aria-hidden="true">
+ <defs>
+ <linearGradient id="landChartLine" x1="0" y1="0" x2="1" y2="0">
+ <stop offset="0%" stop-color="#1B5E20"/>
+ <stop offset="100%" stop-color="#66E38A"/>
+ </linearGradient>
+ <linearGradient id="landChartFill" x1="0" y1="0" x2="0" y2="1">
+ <stop offset="0%" stop-color="#4CD671" stop-opacity=".28"/>
+ <stop offset="100%" stop-color="#4CD671" stop-opacity="0"/>
+ </linearGradient>
+ </defs>
+ <line class="landing-chart-base" x1="0" y1="120" x2="400" y2="120"/>
+ <path class="landing-chart-fill" d="M0,110 L55,92 L100,100 L150,66 L200,76 L255,46 L305,54 L400,10 L400,130 L0,130 Z" fill="url(#landChartFill)"/>
+ <path class="landing-chart-line" pathLength="100" d="M0,110 L55,92 L100,100 L150,66 L200,76 L255,46 L305,54 L400,10" fill="none" stroke="url(#landChartLine)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+ <circle class="landing-chart-dot" cx="400" cy="10" r="5"/>
+ </svg>
+ </div>
+ <div class="landing-features">
+ <div class="landing-feat">
+ <div class="landing-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M12 20V4"/><path d="M20 20v-7"/></svg></div>
+ <div class="landing-feat-txt"><strong>Gastos & Renda</strong><span>Acompanhe entradas e saídas mês a mês, com gráficos e histórico</span></div>
+ </div>
+ <div class="landing-feat">
+ <div class="landing-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6"/><path d="M5 10v8"/><path d="M10 10v8"/><path d="M14 10v8"/><path d="M19 10v8"/><path d="M3 21h18"/></svg></div>
+ <div class="landing-feat-txt"><strong>Contas & Cofrinhos</strong><span>Veja o saldo de cada banco, com rendimento automático do CDI</span></div>
+ </div>
+ <div class="landing-feat">
+ <div class="landing-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/></svg></div>
+ <div class="landing-feat-txt"><strong>Financiamentos</strong><span>Controle parcelas, descontos e saldo devedor em um só lugar</span></div>
+ </div>
+ </div>
  <div class="login-box">
- <div class="login-logo"><img src="icon.png" alt="Controle Aí"></div>
- <div class="login-title"><span class="brand-controle">Controle</span> <span class="brand-ai">Aí</span></div>
- <div class="brand-tag">Organize<span class="brand-dot">.</span> Analise<span class="brand-dot">.</span> Cresça<span class="brand-dot">.</span></div>
- <div class="login-sub">Entre com sua conta Google para acessar seus dados</div>
  <button class="login-btn" onclick="handleGoogleAuth()">
  <img
  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='%23EA4335' d='M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z'/%3E%3Cpath fill='%234285F4' d='M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z'/%3E%3Cpath fill='%23FBBC05' d='M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z'/%3E%3Cpath fill='%2334A853' d='M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z'/%3E%3C/svg%3E">Entrar com Google
  </button>
  <div class="login-status" id="login-status">Carregando...</div>
+ </div>
  </div>
  </div>
 
@@ -3933,18 +4183,27 @@ body.dark .stat-card:hover {
  function getBankLogoUrl(banco) {
  if (!banco) return null;
  const norm = banco.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
- if (BANK_DOMAINS[norm]) return `https://logo.clearbit.com/${BANK_DOMAINS[norm]}?size=64`;
+ if (BANK_DOMAINS[norm]) return `https://www.google.com/s2/favicons?domain=${BANK_DOMAINS[norm]}&sz=128`;
  // tenta achar por correspondência parcial (ex: "Nubank Conta PJ" -> "nubank")
  const chave = Object.keys(BANK_DOMAINS).find(k => norm.includes(k));
- return chave ? `https://logo.clearbit.com/${BANK_DOMAINS[chave]}?size=64` : null;
+ return chave ? `https://www.google.com/s2/favicons?domain=${BANK_DOMAINS[chave]}&sz=128` : null;
+ }
+
+ function bankLogoFallback(imgEl, banco, size) {
+ const inicial = (banco || '?').trim().charAt(0).toUpperCase();
+ const div = document.createElement('div');
+ div.className = 'bank-logo-fallback';
+ div.style.cssText = `width:${size}px;height:${size}px;border-radius:8px;background:var(--border);color:var(--text-l);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:${size*0.45}px;flex-shrink:0`;
+ div.textContent = inicial;
+ imgEl.replaceWith(div);
  }
 
  function bankLogoHtml(banco, size) {
  const url = getBankLogoUrl(banco);
  const inicial = (banco || '?').trim().charAt(0).toUpperCase();
- const fallback = `<div class="bank-logo-fallback" style="width:${size}px;height:${size}px;border-radius:50%;background:var(--border);color:var(--text-l);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:${size*0.45}px;flex-shrink:0">${inicial}</div>`;
- if (!url) return fallback;
- return `<img src="${url}" alt="${banco}" style="width:${size}px;height:${size}px;border-radius:50%;object-fit:contain;background:#fff;padding:3px;flex-shrink:0" onerror="this.outerHTML='${fallback.replace(/'/g, "\\'")}'">`;
+ if (!url) return `<div class="bank-logo-fallback" style="width:${size}px;height:${size}px;min-width:${size}px;border-radius:8px;background:var(--border);color:var(--text-l);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:${size*0.45}px;flex-shrink:0">${inicial}</div>`;
+ const bancoAttr = String(banco).replace(/"/g, '&quot;');
+ return `<img src="${url}" alt="${bancoAttr}" style="width:${size}px;height:${size}px;min-width:${size}px;border-radius:8px;object-fit:cover;flex-shrink:0;display:block" onerror="bankLogoFallback(this, this.alt, ${size})">`;
  }
 
  function renderSaldoBanco(elId) {
@@ -3970,8 +4229,8 @@ body.dark .stat-card:hover {
  const totalBanco = lista.reduce((s, c) => s + calcSaldoComRendimento(c), 0);
  totalGeral += totalBanco;
  html += `<div class="card green" style="grid-column:1/-1">
- <div style="display:flex;align-items:center;gap:8px">
- ${bankLogoHtml(banco, 24)}
+ <div style="display:flex;align-items:center;gap:9px">
+ ${bankLogoHtml(banco, 28)}
  <div class="card-label">${banco}</div>
  </div>
  <div class="card-value">${fmt(totalBanco)}</div>
@@ -3981,12 +4240,12 @@ body.dark .stat-card:hover {
  const rendimento = saldoAtual - c.saldo;
  const dataAtt = c.dataAtt ? new Date(c.dataAtt).toLocaleDateString('pt-BR') : '—';
  html += `<div class="card gray" style="position:relative">
- <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
- <div style="display:flex;align-items:center;gap:6px">
- ${bankLogoHtml(c.banco, 18)}
- <div class="card-label" style="font-size:11px">${c.nome}</div>
+ <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+ <div style="display:flex;align-items:center;gap:7px">
+ ${bankLogoHtml(c.banco, 22)}
+ <div class="card-label" style="font-size:11px;line-height:1">${c.nome}</div>
  </div>
- <div style="display:flex;gap:4px">
+ <div style="display:flex;gap:4px;align-items:center">
  <button class="btn-icon btn-edit" onclick="openEditContaModal('${c.id}')" title="Editar">${ICO_EDIT_CONTAS}</button>
  <button class="btn-icon btn-del" onclick="excluirConta('${c.id}')" title="Excluir">${ICO_DEL_CONTAS}</button>
  </div>
@@ -7441,6 +7700,7 @@ function confirmFinLimparTudo() {
  fbApp = firebase.initializeApp(cfg);
  fbAuth = firebase.auth();
  fbDb = firebase.firestore();
+ try { await fbAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL); } catch (err) { console.warn('Persistência Firebase:', err); }
  fbAuth.onAuthStateChanged(user => {
  fbUser = user;
  updateSyncUI();
@@ -7490,6 +7750,7 @@ function confirmFinLimparTudo() {
  }
  try {
  e('login-status').textContent = 'Abrindo login do Google...';
+ await fbAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
  const provider = new firebase.auth.GoogleAuthProvider();
  await fbAuth.signInWithPopup(provider);
  toast('Conectado com Google!');
