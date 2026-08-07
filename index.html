@@ -3895,6 +3895,58 @@ body.dark .stat-card:hover {
  }
  }
 
+ // Mapa de bancos/fintechs conhecidos -> domínio (usado pra puxar o logo automaticamente)
+ const BANK_DOMAINS = {
+ 'nubank': 'nubank.com.br', 'nu': 'nubank.com.br',
+ 'itau': 'itau.com.br', 'itaú': 'itau.com.br',
+ 'bradesco': 'bradesco.com.br',
+ 'banco do brasil': 'bb.com.br', 'bb': 'bb.com.br',
+ 'caixa': 'caixa.gov.br', 'caixa economica': 'caixa.gov.br', 'caixa econômica': 'caixa.gov.br',
+ 'santander': 'santander.com.br',
+ 'inter': 'bancointer.com.br', 'banco inter': 'bancointer.com.br',
+ 'c6': 'c6bank.com.br', 'c6 bank': 'c6bank.com.br',
+ 'picpay': 'picpay.com',
+ 'mercado pago': 'mercadopago.com.br', 'mercadopago': 'mercadopago.com.br',
+ 'xp': 'xpi.com.br', 'xp investimentos': 'xpi.com.br',
+ 'btg': 'btgpactual.com', 'btg pactual': 'btgpactual.com',
+ 'neon': 'neon.com.br',
+ 'original': 'original.com.br', 'banco original': 'original.com.br',
+ 'sicoob': 'sicoob.com.br',
+ 'sicredi': 'sicredi.com.br',
+ 'safra': 'safra.com.br', 'banco safra': 'safra.com.br',
+ 'pagbank': 'pagbank.com.br', 'pagseguro': 'pagbank.com.br',
+ 'will bank': 'willbank.com.br', 'willbank': 'willbank.com.br',
+ 'next': 'next.me',
+ 'agibank': 'agibank.com.br',
+ 'banrisul': 'banrisul.com.br',
+ 'votorantim': 'bv.com.br', 'bv': 'bv.com.br', 'banco bv': 'bv.com.br',
+ 'rico': 'rico.com.vc',
+ 'clear': 'clear.com.br', 'clear corretora': 'clear.com.br',
+ 'toro': 'toroinvestimentos.com.br',
+ 'ton': 'ton.com.br',
+ 'stone': 'stone.com.br',
+ 'binance': 'binance.com',
+ 'wise': 'wise.com',
+ 'paypal': 'paypal.com'
+ };
+
+ function getBankLogoUrl(banco) {
+ if (!banco) return null;
+ const norm = banco.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+ if (BANK_DOMAINS[norm]) return `https://logo.clearbit.com/${BANK_DOMAINS[norm]}?size=64`;
+ // tenta achar por correspondência parcial (ex: "Nubank Conta PJ" -> "nubank")
+ const chave = Object.keys(BANK_DOMAINS).find(k => norm.includes(k));
+ return chave ? `https://logo.clearbit.com/${BANK_DOMAINS[chave]}?size=64` : null;
+ }
+
+ function bankLogoHtml(banco, size) {
+ const url = getBankLogoUrl(banco);
+ const inicial = (banco || '?').trim().charAt(0).toUpperCase();
+ const fallback = `<div class="bank-logo-fallback" style="width:${size}px;height:${size}px;border-radius:50%;background:var(--border);color:var(--text-l);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:${size*0.45}px;flex-shrink:0">${inicial}</div>`;
+ if (!url) return fallback;
+ return `<img src="${url}" alt="${banco}" style="width:${size}px;height:${size}px;border-radius:50%;object-fit:contain;background:#fff;padding:3px;flex-shrink:0" onerror="this.outerHTML='${fallback.replace(/'/g, "\\'")}'">`;
+ }
+
  function renderSaldoBanco(elId) {
  checkSnapshotDiario5h();
  const el = e(elId);
@@ -3918,7 +3970,10 @@ body.dark .stat-card:hover {
  const totalBanco = lista.reduce((s, c) => s + calcSaldoComRendimento(c), 0);
  totalGeral += totalBanco;
  html += `<div class="card green" style="grid-column:1/-1">
+ <div style="display:flex;align-items:center;gap:8px">
+ ${bankLogoHtml(banco, 24)}
  <div class="card-label">${banco}</div>
+ </div>
  <div class="card-value">${fmt(totalBanco)}</div>
  </div>`;
  lista.forEach(c => {
@@ -3927,7 +3982,10 @@ body.dark .stat-card:hover {
  const dataAtt = c.dataAtt ? new Date(c.dataAtt).toLocaleDateString('pt-BR') : '—';
  html += `<div class="card gray" style="position:relative">
  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+ <div style="display:flex;align-items:center;gap:6px">
+ ${bankLogoHtml(c.banco, 18)}
  <div class="card-label" style="font-size:11px">${c.nome}</div>
+ </div>
  <div style="display:flex;gap:4px">
  <button class="btn-icon btn-edit" onclick="openEditContaModal('${c.id}')" title="Editar">${ICO_EDIT_CONTAS}</button>
  <button class="btn-icon btn-del" onclick="excluirConta('${c.id}')" title="Excluir">${ICO_DEL_CONTAS}</button>
