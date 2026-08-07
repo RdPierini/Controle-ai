@@ -3876,7 +3876,7 @@ body.dark .stat-card:hover {
  if (!conta.cdi || !conta.dataAtt || !conta.saldo) return conta.saldo || 0;
  const diasPassados = diasDesde5h(conta.dataAtt);
  if (diasPassados <= 0) return conta.saldo;
- const taxaDiaria = Math.pow(1 + (CDI_ANUAL * conta.cdi / 100 / 100), 1 / 252) - 1;
+ const taxaDiaria = Math.pow(1 + (CDI_ANUAL * conta.cdi / 100 / 100), 1 / 365) - 1;
  return +(conta.saldo * Math.pow(1 + taxaDiaria, diasPassados)).toFixed(2);
  }
 
