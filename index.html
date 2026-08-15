@@ -5371,6 +5371,7 @@ body.dark .stat-card:hover {
  if (curActive.includes('mes')) renderMes();
  else if (curActive.includes('investimentos')) renderInvestimentos();
  else if (curActive.includes('financiamento')) renderFinanciamento();
+ else if (curActive.includes('cobra')) renderCobraAi();
  else if (curActive.includes('config')) renderConfig();
  else if (curActive.includes('saude')) renderSaude();
  else renderDashboard();
@@ -8883,6 +8884,11 @@ function confirmFinLimparTudo() {
  const ref = fbDb.collection('users').doc(fbUser.uid).collection('extras').doc('financiamento');
  batch.set(ref, { data: financiamentoRaw, updated: firebase.firestore.FieldValue.serverTimestamp() });
  }
+ const cobrancasRaw = localStorage.getItem('cgastos_cobrancas');
+ if (cobrancasRaw) {
+ const ref = fbDb.collection('users').doc(fbUser.uid).collection('extras').doc('cobrancas');
+ batch.set(ref, { data: cobrancasRaw, updated: firebase.firestore.FieldValue.serverTimestamp() });
+ }
  const metaRef = fbDb.collection('users').doc(fbUser.uid);
  batch.set(metaRef, { years: ys, updated: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
  await batch.commit();
@@ -8920,6 +8926,9 @@ function confirmFinLimparTudo() {
  // Restore Financiamento
  const financiamentoSnap = await fbDb.collection('users').doc(fbUser.uid).collection('extras').doc('financiamento').get();
  if (financiamentoSnap.exists && financiamentoSnap.data().data) localStorage.setItem('cgastos_financiamento', financiamentoSnap.data().data);
+ // Restore Cobranças (Cobra Aí)
+ const cobrancasSnap = await fbDb.collection('users').doc(fbUser.uid).collection('extras').doc('cobrancas').get();
+ if (cobrancasSnap.exists && cobrancasSnap.data().data) localStorage.setItem('cgastos_cobrancas', cobrancasSnap.data().data);
  // Update years list
  const metaSnap = await fbDb.collection('users').doc(fbUser.uid).get();
  if (metaSnap.exists) {
@@ -8933,6 +8942,7 @@ function confirmFinLimparTudo() {
  else if (curActive.includes('mes')) renderMes();
  else if (curActive.includes('investimentos')) renderInvestimentos();
  else if (curActive.includes('financiamento')) renderFinanciamento();
+ else if (curActive.includes('cobra')) renderCobraAi();
  else if (curActive.includes('saude')) renderSaude();
  else if (curActive.includes('divide')) renderDivide();
  else if (curActive.includes('notas')) renderNotas();
@@ -8996,6 +9006,7 @@ function confirmFinLimparTudo() {
  else if (curActive.includes('mes')) renderMes();
  else if (curActive.includes('investimentos')) renderInvestimentos();
  else if (curActive.includes('financiamento')) renderFinanciamento();
+ else if (curActive.includes('cobra')) renderCobraAi();
  else if (curActive.includes('saude')) renderSaude();
  setSyncStatus('ok', 'Sincronizado • ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }));
  });
