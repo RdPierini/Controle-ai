@@ -1083,6 +1083,161 @@
  }
  }
 
+ .cob-card {
+ background: var(--card-bg, #fff);
+ border: 1.5px solid var(--border);
+ border-radius: 14px;
+ padding: 16px;
+ margin-bottom: 12px
+ }
+
+ .cob-card-top {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ gap: 10px;
+ flex-wrap: wrap
+ }
+
+ .cob-card-person {
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ min-width: 0
+ }
+
+ .cob-avatar {
+ flex-shrink: 0;
+ width: 42px;
+ height: 42px;
+ border-radius: 50%;
+ background: var(--green-l);
+ color: var(--green-solid, var(--green-d));
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-weight: 800;
+ font-size: 16px;
+ text-transform: uppercase
+ }
+
+ .cob-nome {
+ font-weight: 700;
+ font-size: 14.5px;
+ color: var(--text)
+ }
+
+ .cob-desc {
+ font-size: 12px;
+ color: var(--text-l);
+ margin-top: 1px
+ }
+
+ .cob-saldo {
+ text-align: right;
+ flex-shrink: 0
+ }
+
+ .cob-saldo-label {
+ font-size: 10px;
+ text-transform: uppercase;
+ font-weight: 700;
+ color: var(--text-l);
+ letter-spacing: .3px
+ }
+
+ .cob-saldo-val {
+ font-size: 18px;
+ font-weight: 800;
+ color: var(--red-d)
+ }
+
+ .cob-saldo-val.quitado {
+ color: var(--green-d)
+ }
+
+ .cob-progress-wrap {
+ margin-top: 14px
+ }
+
+ .cob-progress-bar {
+ height: 6px;
+ border-radius: 4px;
+ background: var(--gray);
+ overflow: hidden
+ }
+
+ .cob-progress-fill {
+ height: 100%;
+ background: var(--green-solid, var(--green));
+ border-radius: 4px;
+ transition: width .3s
+ }
+
+ .cob-progress-txt {
+ display: flex;
+ justify-content: space-between;
+ font-size: 11.5px;
+ color: var(--text-l);
+ margin-top: 5px
+ }
+
+ .cob-card-bottom {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ margin-top: 14px;
+ padding-top: 12px;
+ border-top: 1px solid var(--border);
+ flex-wrap: wrap;
+ gap: 8px
+ }
+
+ .cob-next {
+ font-size: 12px;
+ color: var(--text-l)
+ }
+
+ .cob-next strong {
+ color: var(--text)
+ }
+
+ .cob-card-actions {
+ display: flex;
+ align-items: center;
+ gap: 4px
+ }
+
+ .cob-parcela-row {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ padding: 9px 4px;
+ border-bottom: 1px solid var(--border);
+ font-size: 13px
+ }
+
+ .cob-parcela-row:last-child {
+ border-bottom: none
+ }
+
+ .cob-parcela-num {
+ color: var(--text-l);
+ width: 40px;
+ flex-shrink: 0
+ }
+
+ .cob-parcela-data {
+ flex: 1;
+ color: var(--text)
+ }
+
+ .cob-parcela-val {
+ font-weight: 700;
+ color: var(--text);
+ margin-right: 10px
+ }
+
  .gasto-card {
  background: var(--card-bg, #fff);
  border: 1.5px solid var(--border);
@@ -1420,20 +1575,24 @@
  .pay-item {
  background: var(--gray);
  border-radius: 8px;
- padding: 9px 13px;
+ padding: 10px 13px;
  display: flex;
- justify-content: space-between;
- align-items: center
+ flex-direction: column;
+ gap: 3px
  }
 
  .pay-name {
- font-size: 13px;
- font-weight: 600
+ font-size: 10.5px;
+ font-weight: 700;
+ color: var(--text-l);
+ text-transform: uppercase;
+ letter-spacing: .3px
  }
 
  .pay-val {
- font-size: 13px;
- color: var(--text-l)
+ font-size: 15px;
+ font-weight: 700;
+ color: var(--text)
  }
 
  .chart-wrap {
@@ -3908,6 +4067,9 @@ body.dark .stat-card:hover {
  <button class="snav-btn" data-p="financiamento" onclick="showPage('financiamento')">
  <span class="snav-ico"></span><span class="snav-lbl">Financiamento</span>
  </button>
+ <button class="snav-btn" data-p="cobra" onclick="showPage('cobra')">
+ <span class="snav-ico"></span><span class="snav-lbl">Cobra Aí</span>
+ </button>
  <button class="snav-btn" data-p="saude" onclick="showPage('saude')">
  <span class="snav-ico"></span><span class="snav-lbl">Saúde Financeira</span>
  </button>
@@ -4074,6 +4236,7 @@ body.dark .stat-card:hover {
  <div class="table-wrap" id="tbl-inv"></div>
  </div>
  </div>
+ <div id="pagamento-categoria-wrap">
  <div class="grid2">
  <div class="section">
  <div class="sec-title" style="margin-bottom:10px">Formas de Pagamento</div>
@@ -4088,6 +4251,7 @@ body.dark .stat-card:hover {
  <div class="section">
  <div class="sec-title" style="margin-bottom:10px">Gráfico de Categorias</div>
  <div class="chart-wrap" style="height:260px"><canvas id="chart-cat"></canvas></div>
+ </div>
  </div>
  </div>
 
@@ -4195,7 +4359,25 @@ body.dark .stat-card:hover {
  </div>
  </div>
 
- <!-- DIVIDE AÊ -->
+ <!-- COBRA AÍ -->
+ <div id="page-cobra" class="page">
+ <div id="cob-empty" style="display:none">
+ <div class="section" style="text-align:center;padding:40px 20px">
+ <div style="font-size:16px;font-weight:700;margin-bottom:8px">Nenhuma cobrança cadastrada</div>
+ <div style="font-size:13px;color:var(--text-l);margin-bottom:18px">Emprestou seu cartão ou pagou uma compra parcelada pra alguém? Cadastre aqui e acompanhe quanto cada pessoa te deve, mês a mês.</div>
+ <button class="btn btn-g" onclick="openCobModal()">+ Nova Cobrança</button>
+ </div>
+ </div>
+ <div id="cob-content" style="display:none">
+ <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+ <h2 style="font-size:22px;font-weight:800">Cobra Aí</h2>
+ <button class="btn btn-g btn-sm" onclick="openCobModal()">+ Nova Cobrança</button>
+ </div>
+ <div class="cards" id="cob-resumo-cards" style="margin-bottom:18px"></div>
+ <div id="cob-lista"></div>
+ </div>
+ </div>
+
  <div id="page-divide" class="page">
  <div
  style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px">
@@ -5061,6 +5243,7 @@ body.dark .stat-card:hover {
  if (p === 'dashboard') renderDashboard();
  else if (p === 'investimentos') renderInvestimentos();
  else if (p === 'financiamento') renderFinanciamento();
+ else if (p === 'cobra') renderCobraAi();
  else if (p === 'config') renderConfig();
  else if (p === 'saude') renderSaude();
  else if (p === 'divide') { renderDivide(); syncToCloud(); }
@@ -5173,6 +5356,8 @@ body.dark .stat-card:hover {
  e('tab-' + t).classList.add('active');
  const addBtn = e('tab-add-btn');
  if (addBtn) addBtn.textContent = TAB_ADD_LABEL[t] || '+ Adicionar';
+ const pcWrap = e('pagamento-categoria-wrap');
+ if (pcWrap) pcWrap.style.display = (t === 'ent' || t === 'inv') ? 'none' : '';
  renderTab(t);
  }
 
@@ -5738,7 +5923,7 @@ body.dark .stat-card:hover {
  }
  const total = entries.reduce((s, [, v]) =>s + v, 0);
  e('pay-grid').innerHTML = entries.map(([p, v]) => `
- <div class="pay-item"><span class="pay-name">${p}</span><span class="pay-val">${fmt(v)} <small style="opacity:.65">(${(v / total * 100).toFixed(0)}%)</small></span></div>
+ <div class="pay-item"><span class="pay-name">${p}</span><span class="pay-val">${fmt(v)} <small style="opacity:.65;font-weight:500;font-size:11px">(${(v / total * 100).toFixed(0)}%)</small></span></div>
  `).join('');
  // Gráfico de pizza
  if (typeof Chart === 'undefined') return;
@@ -6774,7 +6959,7 @@ body.dark .stat-card:hover {
  e('overlay').classList.remove('open');
  modalTipo = null; modalEditId = null;
  const box = e('modal-box');
- if (box) { delete box.dataset.tipo; delete box.dataset.editParcelasJson; delete box.dataset.editParcelasTipo; delete box.dataset.delTipo; delete box.dataset.delId; delete box.dataset.invEditId; delete box.dataset.delInvId; delete box.dataset.contaEditId; delete box.dataset.notaEditId; delete box.dataset.notaDelId; delete box.dataset.finEdit; delete box.dataset.finNum; }
+ if (box) { delete box.dataset.tipo; delete box.dataset.editParcelasJson; delete box.dataset.editParcelasTipo; delete box.dataset.delTipo; delete box.dataset.delId; delete box.dataset.invEditId; delete box.dataset.delInvId; delete box.dataset.contaEditId; delete box.dataset.notaEditId; delete box.dataset.notaDelId; delete box.dataset.finEdit; delete box.dataset.finNum; delete box.dataset.cobEditId; }
  const btn = e('modal-save-btn');
  if (btn) { btn.textContent = 'Salvar'; btn.style.background = ''; btn.style.color = ''; }
  }
@@ -6805,6 +6990,8 @@ body.dark .stat-card:hover {
  if (dtipo === 'fin-zerar-reajustes') { confirmFinZerarReajustes(); return; }
  if (dtipo === 'fin-limpar-tudo') { confirmFinLimparTudo(); return; }
  if (dtipo === 'fin-excluir') { confirmFinExcluir(); return; }
+ if (dtipo === 'cob-novo') { saveCobranca(); return; }
+ if (dtipo === 'cob-detalhe') { closeModal(); return; }
  if (modalTipo === 'metas') {
  const d = loadInvData();
  if (!d.metasInvestimento) d.metasInvestimento = {};
@@ -7136,6 +7323,19 @@ body.dark .stat-card:hover {
  localStorage.setItem('theme', dark ? 'dark' : 'light');
  const btn = e('btn-dark');
  if (btn) { btn.querySelector('span:last-child').textContent = dark ? 'Modo Claro' : 'Modo Escuro'; }
+ rerenderCurrentPageCharts();
+ }
+
+ function rerenderCurrentPageCharts() {
+ const activePage = document.querySelector('.page.active');
+ if (!activePage) return;
+ const id = activePage.id;
+ if (id === 'page-dashboard') renderDashboard();
+ else if (id === 'page-mes') renderMes();
+ else if (id === 'page-investimentos') renderInvestimentos();
+ else if (id === 'page-financiamento') renderFinanciamento();
+ else if (id === 'page-saude') renderSaude();
+ else if (id === 'page-divide') renderDivide();
  }
 
  // ═══════════════════════════════════════════════
@@ -7901,6 +8101,224 @@ function confirmFinLimparTudo() {
  closeModal();
  renderFinanciamento();
  toast('Tudo limpo! Contrato voltou ao estado inicial.');
+ }
+
+ // ═══════════════════════════════════════════════
+ // COBRA AÍ
+ // ═══════════════════════════════════════════════
+ function cobKey() { return 'cgastos_cobrancas'; }
+
+ function loadCobrancas() {
+ try { const r = localStorage.getItem(cobKey()); return r ? JSON.parse(r) : []; }
+ catch { return []; }
+ }
+
+ function saveCobrancas(arr) {
+ localStorage.setItem(cobKey(), JSON.stringify(arr));
+ scheduleSync();
+ }
+
+ function calcCobranca(c) {
+ const pagas = c.parcelas.filter(p =>p.pago).length;
+ const total = c.parcelas.length;
+ const totalPago = c.parcelas.filter(p =>p.pago).reduce((s, p) =>s + p.valor, 0);
+ const saldoDevedor = c.parcelas.filter(p => !p.pago).reduce((s, p) =>s + p.valor, 0);
+ const valorTotal = c.parcelas.reduce((s, p) =>s + p.valor, 0);
+ const proxima = c.parcelas.find(p => !p.pago) || null;
+ return { pagas, total, totalPago, saldoDevedor, valorTotal, proxima, quitado: pagas === total };
+ }
+
+ function gerarParcelasCobranca(valorParcela, qtd, dataInicioISO, parcelasAntigas) {
+ const antigas = parcelasAntigas || [];
+ const arr = [];
+ for (let i = 0; i < qtd; i++) {
+ const data = finAddMonths(dataInicioISO, i);
+ const old = antigas[i];
+ arr.push({
+ numero: i + 1,
+ data,
+ valor: valorParcela,
+ pago: old ? !!old.pago : false,
+ dataPago: old ? (old.dataPago || '') : ''
+ });
+ }
+ return arr;
+ }
+
+ function renderCobraAi() {
+ const lista = loadCobrancas();
+ const empty = e('cob-empty'), content = e('cob-content');
+ if (!lista.length) {
+ if (empty) empty.style.display = '';
+ if (content) content.style.display = 'none';
+ return;
+ }
+ if (empty) empty.style.display = 'none';
+ if (content) content.style.display = '';
+
+ // Resumo geral
+ let totalReceber = 0, totalRecebido = 0, qtdAtivas = 0;
+ lista.forEach(c => {
+ const calc = calcCobranca(c);
+ totalReceber += calc.saldoDevedor;
+ totalRecebido += calc.totalPago;
+ if (!calc.quitado) qtdAtivas++;
+ });
+ e('cob-resumo-cards').innerHTML = `
+ <div class="card red"><div class="card-label">A Receber</div><div class="card-value">${fmt(totalReceber)}</div></div>
+ <div class="card green"><div class="card-label">Já Recebido</div><div class="card-value">${fmt(totalRecebido)}</div></div>
+ <div class="card gray"><div class="card-label">Cobranças Ativas</div><div class="card-value">${qtdAtivas}</div></div>
+ `;
+
+ // Lista de cobranças (ordenadas: ativas primeiro)
+ const ordenada = [...lista].sort((a, b) => {
+ const ca = calcCobranca(a), cb = calcCobranca(b);
+ if (ca.quitado !== cb.quitado) return ca.quitado ? 1 : -1;
+ return 0;
+ });
+
+ e('cob-lista').innerHTML = ordenada.map(c => {
+ const calc = calcCobranca(c);
+ const pct = calc.total ? Math.round(calc.pagas / calc.total * 100) : 0;
+ return `<div class="cob-card">
+ <div class="cob-card-top">
+ <div class="cob-card-person">
+ <div class="cob-avatar">${(c.pessoa || '?').charAt(0)}</div>
+ <div style="min-width:0">
+ <div class="cob-nome">${c.pessoa}</div>
+ <div class="cob-desc">${c.descricao || ''}</div>
+ </div>
+ </div>
+ <div class="cob-saldo">
+ <div class="cob-saldo-label">${calc.quitado ? 'Quitado' : 'Saldo devedor'}</div>
+ <div class="cob-saldo-val ${calc.quitado ? 'quitado' : ''}">${fmt(calc.saldoDevedor)}</div>
+ </div>
+ </div>
+ <div class="cob-progress-wrap">
+ <div class="cob-progress-bar"><div class="cob-progress-fill" style="width:${pct}%"></div></div>
+ <div class="cob-progress-txt"><span>${calc.pagas}/${calc.total} parcelas pagas</span><span>${fmt(calc.valorTotal)} no total</span></div>
+ </div>
+ <div class="cob-card-bottom">
+ <div class="cob-next">${calc.quitado ? '✓ Todas as parcelas cobradas' : `Próxima: <strong>${fmtDataBr(calc.proxima.data)} · ${fmt(calc.proxima.valor)}</strong>`}</div>
+ <div class="cob-card-actions">
+ ${!calc.quitado ? `<button class="btn btn-g btn-sm" onclick="marcarProximaCobrancaPaga('${c.id}')">Marcar recebido</button>` : ''}
+ <button class="btn-icon btn-edit" onclick="openCobDetalheModal('${c.id}')" title="Ver parcelas"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg></button>
+ <button class="btn-icon btn-edit" onclick="openCobModal('${c.id}')" title="Editar">${ICO_EDIT}</button>
+ <button class="btn-icon btn-del" onclick="delCobranca('${c.id}')" title="Excluir">${ICO_DEL}</button>
+ </div>
+ </div>
+ </div>`;
+ }).join('');
+ }
+
+ function fmtDataBr(iso) {
+ if (!iso) return '';
+ const [y, m, d] = iso.split('-');
+ return `${d}/${m}/${y}`;
+ }
+
+ function marcarProximaCobrancaPaga(id) {
+ const lista = loadCobrancas();
+ const c = lista.find(x =>x.id === id);
+ if (!c) return;
+ const prox = c.parcelas.find(p => !p.pago);
+ if (!prox) return;
+ prox.pago = true;
+ prox.dataPago = new Date().toISOString().slice(0, 10);
+ saveCobrancas(lista);
+ renderCobraAi();
+ toast('Parcela marcada como recebida!');
+ }
+
+ function openCobModal(id) {
+ const lista = loadCobrancas();
+ const c = id ? lista.find(x =>x.id === id) : null;
+ const isEdit = !!c;
+ e('modal-title').textContent = isEdit ? 'Editar Cobrança' : 'Nova Cobrança';
+ e('modal-body').innerHTML = `
+ <div class="frow"><label>Nome da pessoa</label><input id="f-cob-pessoa" type="text" value="${c?.pessoa || ''}" placeholder="Ex: João"></div>
+ <div class="frow"><label>Descrição</label><input id="f-cob-desc" type="text" value="${c?.descricao || ''}" placeholder="Ex: iPhone parcelado no meu cartão"></div>
+ <div class="frow-half">
+ <div class="frow"><label>Valor da parcela (R$)</label><input id="f-cob-valor" type="text" value="${c ? String(c.parcelas[0]?.valor || '').replace('.', ',') : ''}" placeholder="0,00"></div>
+ <div class="frow"><label>Qtd. de parcelas</label><input id="f-cob-qtd" type="number" min="1" value="${c ? c.parcelas.length : ''}" placeholder="12"></div>
+ </div>
+ <div class="frow"><label>Data da 1ª parcela</label><input id="f-cob-data" type="date" value="${c ? c.parcelas[0]?.data : new Date().toISOString().slice(0, 10)}"></div>
+ ${isEdit ? `<div style="font-size:11px;color:var(--text-l);margin-top:-4px">Alterar valor ou quantidade recalcula as parcelas ainda não pagas, sem mexer nas que já foram marcadas como recebidas.</div>` : ''}
+ `;
+ const box = e('modal-box');
+ box.dataset.tipo = 'cob-novo';
+ box.dataset.cobEditId = id || '';
+ modalTipo = 'cob-novo'; modalEditId = null;
+ e('overlay').classList.add('open');
+ }
+
+ function saveCobranca() {
+ const box = e('modal-box');
+ const id = box?.dataset.cobEditId || '';
+ const pessoa = e('f-cob-pessoa').value.trim();
+ const descricao = e('f-cob-desc').value.trim();
+ const valor = parseFloat(e('f-cob-valor').value.replace(/\./g, '').replace(',', '.'));
+ const qtd = parseInt(e('f-cob-qtd').value, 10);
+ const dataInicio = e('f-cob-data').value;
+ if (!pessoa || !valor || !qtd || !dataInicio) { toast('Preencha todos os campos.'); return; }
+
+ const lista = loadCobrancas();
+ if (id) {
+ const c = lista.find(x =>x.id === id);
+ c.pessoa = pessoa;
+ c.descricao = descricao;
+ c.parcelas = gerarParcelasCobranca(valor, qtd, dataInicio, c.parcelas);
+ } else {
+ lista.push({
+ id: 'cob_' + Date.now(),
+ pessoa, descricao,
+ parcelas: gerarParcelasCobranca(valor, qtd, dataInicio, [])
+ });
+ }
+ saveCobrancas(lista);
+ closeModal();
+ renderCobraAi();
+ toast(id ? 'Cobrança atualizada!' : 'Cobrança cadastrada!');
+ }
+
+ function delCobranca(id) {
+ if (!confirm('Excluir essa cobrança e todo o histórico de parcelas?')) return;
+ const lista = loadCobrancas().filter(x =>x.id !== id);
+ saveCobrancas(lista);
+ renderCobraAi();
+ toast('Cobrança excluída.');
+ }
+
+ function openCobDetalheModal(id) {
+ const lista = loadCobrancas();
+ const c = lista.find(x =>x.id === id);
+ if (!c) return;
+ e('modal-title').textContent = `Parcelas · ${c.pessoa}`;
+ e('modal-body').innerHTML = `<div style="max-height:360px;overflow-y:auto">
+ ${c.parcelas.map((p, i) => `<div class="cob-parcela-row">
+ <span class="cob-parcela-num">${p.numero}/${c.parcelas.length}</span>
+ <span class="cob-parcela-data">${fmtDataBr(p.data)}</span>
+ <span class="cob-parcela-val">${fmt(p.valor)}</span>
+ <span class="td-pago ${p.pago ? 'sim' : 'nao'}" style="cursor:pointer" onclick="toggleCobParcela('${c.id}',${i})">${p.pago ? 'Recebido' : 'Pendente'}</span>
+ </div>`).join('')}
+ </div>`;
+ const box = e('modal-box');
+ box.dataset.tipo = 'cob-detalhe';
+ modalTipo = 'cob-detalhe'; modalEditId = null;
+ e('overlay').classList.add('open');
+ divideModalBtn('Fechar');
+ }
+
+ function toggleCobParcela(id, idx) {
+ const lista = loadCobrancas();
+ const c = lista.find(x =>x.id === id);
+ if (!c) return;
+ const p = c.parcelas[idx];
+ p.pago = !p.pago;
+ p.dataPago = p.pago ? new Date().toISOString().slice(0, 10) : '';
+ saveCobrancas(lista);
+ openCobDetalheModal(id);
+ renderCobraAi();
  }
 
  // ═══════════════════════════════════════════════
