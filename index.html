@@ -1392,6 +1392,28 @@
  color: #81c784
  }
 
+ body.dark {
+ scrollbar-color: #2a3f34 transparent
+ }
+
+ body.dark *::-webkit-scrollbar {
+ width: 8px;
+ height: 8px
+ }
+
+ body.dark *::-webkit-scrollbar-track {
+ background: transparent
+ }
+
+ body.dark *::-webkit-scrollbar-thumb {
+ background: #2a3f34;
+ border-radius: 10px
+ }
+
+ body.dark *::-webkit-scrollbar-thumb:hover {
+ background: #3c5a49
+ }
+
  body.dark .card.green .card-value {
  color: #fff
  }
