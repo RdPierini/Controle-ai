@@ -424,6 +424,20 @@
  color: var(--text)
  }
 
+ .card.card-compact {
+ padding: 10px 14px;
+ border-radius: 12px
+ }
+
+ .card.card-compact .card-label {
+ font-size: 10px;
+ margin-bottom: 3px
+ }
+
+ .card.card-compact .card-value {
+ font-size: 15px
+ }
+
  .grid2 {
  display: grid;
  grid-template-columns: 1.2fr 1fr;
@@ -811,7 +825,115 @@
  .table-actions {
  display: flex;
  justify-content: flex-end;
+ gap: 8px;
  margin-bottom: 10px
+ }
+
+ .table-actions.with-sort {
+ justify-content: space-between;
+ align-items: center;
+ flex-wrap: wrap
+ }
+
+ .sort-dd {
+ position: relative
+ }
+
+ .sort-dd-btn {
+ display: flex;
+ align-items: center;
+ gap: 7px;
+ padding: 8px 12px;
+ border: 1.5px solid var(--border);
+ border-radius: 10px;
+ font-size: 12.5px;
+ font-weight: 600;
+ background: var(--card-bg, #fff);
+ color: var(--text-l);
+ outline: none;
+ cursor: pointer;
+ transition: all .15s;
+ white-space: nowrap
+ }
+
+ .sort-dd-btn svg:first-child {
+ color: var(--green-solid);
+ flex-shrink: 0
+ }
+
+ .sort-dd-btn span {
+ color: var(--text)
+ }
+
+ .sort-dd-btn:hover {
+ border-color: var(--green-solid);
+ background: var(--green-l)
+ }
+
+ .sort-dd-chev {
+ transition: transform .2s;
+ color: var(--text-l);
+ flex-shrink: 0
+ }
+
+ .sort-dd.open .sort-dd-chev {
+ transform: rotate(180deg)
+ }
+
+ .sort-dd-menu {
+ display: none;
+ position: absolute;
+ top: calc(100% + 6px);
+ left: 0;
+ min-width: 210px;
+ background: var(--card-bg, #fff);
+ border: 1.5px solid var(--border);
+ border-radius: 12px;
+ box-shadow: 0 10px 28px rgba(0, 0, 0, .16);
+ padding: 6px;
+ z-index: 60
+ }
+
+ .sort-dd.open .sort-dd-menu {
+ display: block
+ }
+
+ .sort-dd-opt {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ gap: 8px;
+ width: 100%;
+ padding: 8px 10px;
+ border: none;
+ background: none;
+ border-radius: 8px;
+ font-size: 13px;
+ font-weight: 500;
+ color: var(--text);
+ text-align: left;
+ cursor: pointer;
+ transition: background .12s
+ }
+
+ .sort-dd-opt:hover {
+ background: var(--green-l)
+ }
+
+ .sort-dd-opt.active {
+ color: var(--green-solid);
+ font-weight: 700;
+ background: var(--green-l)
+ }
+
+ .sort-dd-opt .sort-dd-check {
+ opacity: 0;
+ color: var(--green-solid);
+ flex-shrink: 0
+ }
+
+ .sort-dd-opt.active .sort-dd-check {
+ opacity: 1
  }
 
  .table-wrap {
@@ -1896,8 +2018,7 @@ body.dark .stat-card:hover {
  background: radial-gradient(120% 100% at 50% 0%, #0f2117 0%, #081210 55%, #05080a 100%);
  padding: 52px 28px 34px;
  text-align: center;
- overflow: hidden;
- border-bottom: 1px solid rgba(76, 214, 113, .14)
+ overflow: hidden
  }
 
  .landing-glow {
@@ -2035,8 +2156,8 @@ body.dark .stat-card:hover {
  .landing-features {
  display: flex;
  flex-direction: column;
- gap: 1px;
- background: rgba(255, 255, 255, .06);
+ gap: 0;
+ background: #0b0f0d;
  margin: 0 20px;
  border-radius: 14px;
  overflow: hidden;
@@ -2346,7 +2467,7 @@ body.dark .stat-card:hover {
  }
 
  body.dark .mobile-topbar .brand-controle {
- color: #1a1a1a
+ color: #f0f0f0
  }
 
  body.dark .sidebar-header .brand-controle {
@@ -2573,6 +2694,11 @@ body.dark .stat-card:hover {
  height: 58px
  }
 
+ body.dark .mobile-topbar {
+ background: #0d1512;
+ border-bottom-color: #1c2a22
+ }
+
  .mobile-topbar-title {
  flex: 1;
  display: flex;
@@ -2616,6 +2742,12 @@ body.dark .stat-card:hover {
  line-height: 1;
  border-radius: 12px;
  transition: all .15s
+ }
+
+ body.dark .mobile-menu-btn {
+ background: #131f19;
+ border-color: #1c2a22;
+ color: #eef1ee
  }
 
  .mobile-menu-btn:active {
@@ -3639,12 +3771,30 @@ body.dark .stat-card:hover {
  <button class="tab-btn" data-tab="inv" onclick="selTab('inv')">Investimentos</button>
  </div>
  <div id="tab-gf" class="tab-pane active">
- <div class="table-actions"><button class="btn btn-g btn-sm" onclick="openModal('gf')">+ Adicionar Gasto
+ <div class="table-actions with-sort">
+ <div class="sort-dd" id="sortdd-gf">
+ <button type="button" class="sort-dd-btn" onclick="toggleSortDD('gf')">
+ <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+ <span id="sortdd-label-gf">Data (mais recente)</span>
+ <svg class="sort-dd-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+ </button>
+ <div class="sort-dd-menu" id="sortdd-menu-gf"></div>
+ </div>
+ <button class="btn btn-g btn-sm" onclick="openModal('gf')">+ Adicionar Gasto
  Fixo</button></div>
  <div class="table-wrap" id="tbl-gf"></div>
  </div>
  <div id="tab-gv" class="tab-pane">
- <div class="table-actions"><button class="btn btn-g btn-sm" onclick="openModal('gv')">+ Adicionar Gasto
+ <div class="table-actions with-sort">
+ <div class="sort-dd" id="sortdd-gv">
+ <button type="button" class="sort-dd-btn" onclick="toggleSortDD('gv')">
+ <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+ <span id="sortdd-label-gv">Data (mais recente)</span>
+ <svg class="sort-dd-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+ </button>
+ <div class="sort-dd-menu" id="sortdd-menu-gv"></div>
+ </div>
+ <button class="btn btn-g btn-sm" onclick="openModal('gv')">+ Adicionar Gasto
  Variável</button></div>
  <div class="table-wrap" id="tbl-gv"></div>
  </div>
@@ -4285,9 +4435,10 @@ body.dark .stat-card:hover {
  checkSnapshotDiario5h();
  const el = e(elId);
  if (!el) return;
+ el.style.gap = '8px';
  const { contas } = loadContas();
  if (!contas.length) {
- el.innerHTML = `<div class="card gray"><div class="card-label">Contas & Cofrinhos</div><div class="card-value" style="font-size:14px">Nenhuma conta cadastrada</div></div>`;
+ el.innerHTML = `<div class="card gray card-compact"><div class="card-label">Contas & Cofrinhos</div><div class="card-value" style="font-size:13px">Nenhuma conta cadastrada</div></div>`;
  return;
  }
 
@@ -4303,10 +4454,10 @@ body.dark .stat-card:hover {
  Object.entries(bancos).forEach(([banco, lista]) => {
  const totalBanco = lista.reduce((s, c) => s + calcSaldoComRendimento(c), 0);
  totalGeral += totalBanco;
- html += `<div class="card green" style="grid-column:1/-1">
- <div style="display:flex;align-items:center;gap:9px">
- ${bankLogoHtml(banco, 28)}
- <div class="card-label">${banco}</div>
+ html += `<div class="card green card-compact" style="display:flex;flex-direction:column;justify-content:center">
+ <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+ ${bankLogoHtml(banco, 18)}
+ <div class="card-label" style="margin-bottom:0">${banco}</div>
  </div>
  <div class="card-value">${fmt(totalBanco)}</div>
  </div>`;
@@ -4314,26 +4465,26 @@ body.dark .stat-card:hover {
  const saldoAtual = calcSaldoComRendimento(c);
  const rendimento = saldoAtual - c.saldo;
  const dataAtt = c.dataAtt ? new Date(c.dataAtt).toLocaleDateString('pt-BR') : '—';
- html += `<div class="card gray" style="position:relative">
- <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
- <div style="display:flex;align-items:center;gap:7px">
- ${bankLogoHtml(c.banco, 22)}
- <div class="card-label" style="font-size:11px;line-height:1">${c.nome}</div>
+ html += `<div class="card gray card-compact" style="position:relative">
+ <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+ <div style="display:flex;align-items:center;gap:6px">
+ ${bankLogoHtml(c.banco, 17)}
+ <div class="card-label" style="font-size:10px;line-height:1;margin-bottom:0">${c.nome}</div>
  </div>
- <div style="display:flex;gap:4px;align-items:center">
+ <div style="display:flex;gap:3px;align-items:center">
  <button class="btn-icon btn-edit" onclick="openEditContaModal('${c.id}')" title="Editar">${ICO_EDIT_CONTAS}</button>
  <button class="btn-icon btn-del" onclick="excluirConta('${c.id}')" title="Excluir">${ICO_DEL_CONTAS}</button>
  </div>
  </div>
- <div style="font-size:18px;font-weight:800;color:var(--text)">${fmt(saldoAtual)}</div>
- ${c.cdi ? `<div style="font-size:11px;color:var(--text-l);margin-top:3px">${c.cdi}% CDI · +${fmt(rendimento)} desde ${dataAtt}</div>` : `<div style="font-size:11px;color:var(--text-l);margin-top:3px">Sem rendimento · att. ${dataAtt}</div>`}
+ <div style="font-size:15px;font-weight:800;color:var(--text)">${fmt(saldoAtual)}</div>
+ ${c.cdi ? `<div style="font-size:10px;color:var(--text-l);margin-top:2px">${c.cdi}% CDI · +${fmt(rendimento)} desde ${dataAtt}</div>` : `<div style="font-size:10px;color:var(--text-l);margin-top:2px">Sem rendimento · att. ${dataAtt}</div>`}
  </div>`;
  });
  });
 
  if (Object.keys(bancos).length >1 || contas.length >1) {
- html = `<div class="card blue" style="grid-column:1/-1">
- <div class="card-label">Total Geral</div>
+ html = `<div class="card blue card-compact" style="display:flex;flex-direction:column;justify-content:center">
+ <div class="card-label" style="margin-bottom:3px">Total Geral</div>
  <div class="card-value">${fmt(totalGeral)}</div>
  </div>` + html;
  }
@@ -5069,10 +5220,74 @@ body.dark .stat-card:hover {
  else if (t === 'inv') renderInv();
  }
 
+ const sortState = { gf: 'data-desc', gv: 'data-desc' };
+ const SORT_OPTS = [
+ { val: 'data-desc', label: 'Data (mais recente)' },
+ { val: 'data-asc', label: 'Data (mais antiga)' },
+ { val: 'valor-desc', label: 'Valor (maior)' },
+ { val: 'valor-asc', label: 'Valor (menor)' },
+ { val: 'cat-asc', label: 'Categoria (A-Z)' }
+ ];
+
+ function buildSortMenu(tipo) {
+ const menu = e('sortdd-menu-' + tipo);
+ if (!menu) return;
+ menu.innerHTML = SORT_OPTS.map(o => `
+ <button type="button" class="sort-dd-opt ${sortState[tipo] === o.val ? 'active' : ''}" onclick="chooseSort('${tipo}','${o.val}')">
+ <span>${o.label}</span>
+ <svg class="sort-dd-check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+ </button>`).join('');
+ const lbl = e('sortdd-label-' + tipo);
+ if (lbl) lbl.textContent = (SORT_OPTS.find(o => o.val === sortState[tipo]) || SORT_OPTS[0]).label;
+ }
+
+ function toggleSortDD(tipo) {
+ const dd = e('sortdd-' + tipo);
+ if (!dd) return;
+ const wasOpen = dd.classList.contains('open');
+ document.querySelectorAll('.sort-dd.open').forEach(x => x.classList.remove('open'));
+ if (!wasOpen) { buildSortMenu(tipo); dd.classList.add('open'); }
+ }
+
+ document.addEventListener('click', ev => {
+ if (!ev.target.closest('.sort-dd')) document.querySelectorAll('.sort-dd.open').forEach(x => x.classList.remove('open'));
+ });
+
+ function chooseSort(tipo, val) {
+ sortState[tipo] = val;
+ const dd = e('sortdd-' + tipo);
+ if (dd) dd.classList.remove('open');
+ buildSortMenu(tipo);
+ renderTbl(tipo);
+ }
+
+ function parseDataBr(s) {
+ if (!s) return 0;
+ const p = s.split('/');
+ if (p.length !== 3) return 0;
+ return new Date(+p[2], +p[1] - 1, +p[0]).getTime();
+ }
+
+ function sortArr(arr, mode) {
+ const copy = [...arr];
+ const [campo, dir] = mode.split('-');
+ copy.sort((a, b) => {
+ let r = 0;
+ if (campo === 'data') r = parseDataBr(a.data) - parseDataBr(b.data);
+ else if (campo === 'valor') r = a.valor - b.valor;
+ else if (campo === 'cat') r = (a.categoria || '').localeCompare(b.categoria || '');
+ return dir === 'desc' ? -r : r;
+ });
+ return copy;
+ }
+
  function renderTbl(tipo) {
  const d = loadData();
  const m = d.meses[mesSel];
- const arr = tipo === 'gf' ? m.gastosFixos : m.gastosVariaveis;
+ const arrRaw = tipo === 'gf' ? m.gastosFixos : m.gastosVariaveis;
+ const lbl = e('sortdd-label-' + tipo);
+ if (lbl) lbl.textContent = (SORT_OPTS.find(o => o.val === sortState[tipo]) || SORT_OPTS[0]).label;
+ const arr = sortArr(arrRaw, sortState[tipo]);
  const total = arr.reduce((s, x) =>s + x.valor, 0);
  if (!arr.length) {
  e('tbl-' + tipo).innerHTML = `<div class="empty"><div class="empty-icon"></div><p>Nenhum registro ainda.<br>Clique em "+ Adicionar"para começar.</p></div>`;
