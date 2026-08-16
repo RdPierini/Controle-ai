@@ -1,0 +1,21 @@
+# Controle Aí
+
+> Controle Aí é um aplicativo web (PWA) de controle financeiro pessoal. Permite registrar gastos fixos e variáveis, entradas, investimentos, financiamentos e cobranças entre pessoas, com gráficos e relatórios mensais.
+
+Controle Aí ajuda pessoas a organizar sua vida financeira: gastos, receitas, investimentos, financiamentos parcelados e cobranças de terceiros, tudo em um único painel, com sincronização na nuvem via login Google.
+
+## Principais funcionalidades
+- Gastos Fixos e Variáveis, com categorias e parcelamento
+- Entradas (receitas)
+- Investe Aí (metas e acompanhamento de investimentos)
+- Financia Aí (controle de financiamentos parcelados, com reajuste por índice)
+- Cobra Aí (cobranças e empréstimos entre pessoas, parcela a parcela)
+- Divide Aí (divisão de contas em grupo/eventos)
+- Anote Aí (notas financeiras)
+- Saúde Financeira (indicadores e KPIs mensais)
+
+## Idioma
+Português (Brasil)
+
+## Acesso
+Aplicativo requer login com conta Google. Não há conteúdo público indexável além da página inicial de apresentação.

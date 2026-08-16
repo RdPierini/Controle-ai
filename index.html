@@ -5,8 +5,8 @@
  <meta charset="UTF-8">
  <meta name="viewport" content=" width=device-width, initial-scale=1.0">
  <title>Controle Aí </title>
- <link rel="icon" href="icon.png" type="image/png">
- <link rel="apple-touch-icon" href="icon.png">
+ <link rel="icon" href="icon-192.png" type="image/png">
+ <link rel="apple-touch-icon" href="icon-192.png">
  <link rel="manifest" href="manifest.json">
  <meta name="theme-color" content="#2e7d32">
  <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1939,6 +1939,20 @@
  border-color: #4caf50
  }
 
+ .frow input[type="date"]::-webkit-calendar-picker-indicator {
+ cursor: pointer;
+ opacity: .6;
+ transition: opacity .15s
+ }
+
+ .frow input[type="date"]::-webkit-calendar-picker-indicator:hover {
+ opacity: 1
+ }
+
+ body.dark input[type="date"] {
+ color-scheme: dark
+ }
+
  body.dark .add-tag-input {
  background: #131f19;
  color: #e0e0e0;
@@ -2073,67 +2087,95 @@
  color: #81c784
  }
 
- /* --- Novo CSS para os Insights Anuais --- */
+ /* --- Cards de KPI do mês --- */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
   margin-top: 14px;
 }
 
-@media(max-width: 768px) {
+@media(max-width: 900px) {
   .stats-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 colunas no celular */
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media(max-width: 400px) {
+@media(max-width: 640px) {
   .stats-grid {
-    grid-template-columns: 1fr; /* 1 coluna em telas muito pequenas */
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width: 380px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
   }
 }
 
 .stat-card {
   background: var(--card-bg, #fff);
   border: 1.5px solid var(--border);
-  border-radius: 16px;
-  padding: 16px;
-  transition: all 0.2s ease;
-  cursor: pointer;
+  border-radius: 12px;
+  padding: 10px 12px;
+  transition: border-color .15s, transform .15s;
+  cursor: default;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 6px;
 }
 
 .stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   border-color: var(--green);
-}
-
-body.dark .stat-card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 .stat-card-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 12px;
+  align-items: center;
+  gap: 7px;
 }
 
 .stat-card-ico {
-  font-size: 20px;
+  font-size: 14px;
   background: var(--gray);
-  width: 36px;
-  height: 36px;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 7px;
 }
+
+.stat-card-ico svg {
+  width: 13px;
+  height: 13px
+}
+
+.stat-card-lbl {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--text-l);
+  text-transform: uppercase;
+  letter-spacing: .3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+.stat-card-val {
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.15
+}
+
+.stat-card-delta {
+  font-size: 10px;
+  font-weight: 600
+}
+
 
  /* ── NOTAS ── */
  .notas-toolbar {
@@ -3977,7 +4019,7 @@ body.dark .stat-card:hover {
  <div class="landing-hero">
  <div class="landing-glow"></div>
  <div class="landing-mark">
- <img src="icon.png" alt="">
+ <img src="icon-check.png" alt="">
  </div>
  <div class="landing-title">Controle<span class="landing-title-accent">Aí</span></div>
  <div class="landing-tag">Seu dinheiro<span class="landing-dot">,</span><span class="landing-tag-accent">seu controle</span></div>
@@ -5655,12 +5697,10 @@ body.dark .stat-card:hover {
  <div class="stat-card">
  <div class="stat-card-header">
  <div class="stat-card-ico" style="color:${cor}">${ico}</div>
- <div style="font-size:10px;font-weight:700;color:var(--text-l);text-transform:uppercase;letter-spacing:.5px;text-align:right">${label}</div>
+ <div class="stat-card-lbl">${label}</div>
  </div>
- <div>
- <div style="font-size:17px;font-weight:800;color:${cor};line-height:1.2">${valor}</div>
- ${delta ? `<div style="font-size:11px;font-weight:600;margin-top:4px">${delta}</div>` : ''}
- </div>
+ <div class="stat-card-val" style="color:${cor}">${valor}</div>
+ ${delta ? `<div class="stat-card-delta">${delta}</div>` : ''}
  </div>`;
 
  e('mes-cards').className = 'stats-grid';
@@ -5751,6 +5791,25 @@ body.dark .stat-card:hover {
  const p = s.split('/');
  if (p.length !== 3) return 0;
  return new Date(+p[2], +p[1] - 1, +p[0]).getTime();
+ }
+
+ // Conversão entre formato brasileiro (dd/mm/aaaa) usado internamente
+ // e o formato ISO (aaaa-mm-dd) exigido por <input type="date">
+ function brToIso(br) {
+ if (!br) return '';
+ const p = br.split('/');
+ if (p.length !== 3) return '';
+ const [d, m, y] = p;
+ if (!d || !m || !y || y.length !== 4) return '';
+ return `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
+ }
+
+ function isoToBr(iso) {
+ if (!iso) return '';
+ const p = iso.split('-');
+ if (p.length !== 3) return '';
+ const [y, m, d] = p;
+ return `${d}/${m}/${y}`;
  }
 
  function sortArr(arr, mode) {
@@ -6635,12 +6694,10 @@ body.dark .stat-card:hover {
  <div class="stat-card">
  <div class="stat-card-header">
  <div class="stat-card-ico" style="color:${cor}">${ico}</div>
- <div style="font-size:10px;font-weight:700;color:var(--text-l);text-transform:uppercase;letter-spacing:.5px;text-align:right">${label}</div>
+ <div class="stat-card-lbl">${label}</div>
  </div>
- <div>
- <div style="font-size:17px;font-weight:800;color:${cor};line-height:1.2">${valor}</div>
- ${delta ? `<div style="font-size:11px;font-weight:600;margin-top:4px">${delta}</div>` : ''}
- </div>
+ <div class="stat-card-val" style="color:${cor}">${valor}</div>
+ ${delta ? `<div class="stat-card-delta">${delta}</div>` : ''}
  </div>`;
 
  e('saude-mes-cards').className = 'stats-grid';
@@ -6977,7 +7034,7 @@ body.dark .stat-card:hover {
  <div class="frow"><label>Categoria</label><select id="f-cat"><option value="">Selecione...</option>${catOpts}</select></div>
  <div class="frow"><label>Descrição</label><input id="f-desc" value="${item ? item.descricao : ''}" placeholder="Ex: Netflix"></div>
  <div class="frow-half">
- <div class="frow"><label>Data</label><input id="f-data" type="text" value="${item ? item.data : ''}" placeholder="dd/mm/aaaa"></div>
+ <div class="frow"><label>Data</label><input id="f-data" type="date" value="${item ? brToIso(item.data) : ''}"></div>
  <div class="frow"><label>Parcela (ex: 1/3)</label><input id="f-parcela" value="${item && item.parcela ? item.parcela : ''}" placeholder="Opcional" oninput="updateParcelaInfo()"></div>
  </div>
  ${!editId ? `<div id="parcela-info" style="display:none">
@@ -6996,7 +7053,7 @@ body.dark .stat-card:hover {
  } else if (tipo === 'ent') {
  body = `
  <div class="frow"><label>Descrição</label><input id="f-desc" value="${item ? item.descricao : ''}" placeholder="Ex: Salário"></div>
- <div class="frow"><label>Data</label><input id="f-data" type="text" value="${item ? item.data : ''}" placeholder="dd/mm/aaaa"></div>
+ <div class="frow"><label>Data</label><input id="f-data" type="date" value="${item ? brToIso(item.data) : ''}"></div>
  <div class="frow"><label>Valor (R$)</label><input id="f-valor" type="text" value="${item ? String(item.valor).replace('.', ',') : ''}" placeholder="0,00"></div>
  `;
  } else {
@@ -7066,7 +7123,7 @@ body.dark .stat-card:hover {
  if (tipo === 'gf' || tipo === 'gv') {
  const cat = e('f-cat')?.value;
  const desc = e('f-desc')?.value?.trim();
- const data = e('f-data')?.value?.trim();
+ const data = isoToBr(e('f-data')?.value);
  const parcela = e('f-parcela')?.value?.trim();
  const pag = e('f-pag')?.value;
  const valor = parseVal(e('f-valor')?.value);
@@ -7075,7 +7132,7 @@ body.dark .stat-card:hover {
  entry.pago = e('f-pago')?.checked || false;
  } else if (tipo === 'ent') {
  const desc = e('f-desc')?.value?.trim();
- const data = e('f-data')?.value?.trim();
+ const data = isoToBr(e('f-data')?.value);
  const valor = parseVal(e('f-valor')?.value);
  if (!desc) { toast('Preencha a descrição'); return; }
  entry = { descricao: desc, data: data || '', valor: Math.abs(valor) };
@@ -8522,11 +8579,11 @@ function confirmFinLimparTudo() {
  }
 
  function divideNovoEvento() {
- const hoje = new Date().toLocaleDateString('pt-BR');
+ const hoje = new Date().toISOString().slice(0, 10);
  e('modal-title').textContent = 'Novo Evento';
  e('modal-body').innerHTML = `
  <div class="frow"><label>Nome do evento</label><input id="dv-nome" placeholder="Ex: Viagem para SP, Churrasco..."></div>
- <div class="frow"><label>Data</label><input id="dv-data" type="text" value="${hoje}" placeholder="dd/mm/aaaa"></div>
+ <div class="frow"><label>Data</label><input id="dv-data" type="date" value="${hoje}"></div>
  `;
  e('modal-box').dataset.tipo = 'divide-novo-evento';
  e('overlay').classList.add('open');
@@ -8535,7 +8592,7 @@ function confirmFinLimparTudo() {
 
  function divideSalvarNovoEvento() {
  const nome = e('dv-nome')?.value.trim();
- const data = e('dv-data')?.value.trim() || new Date().toLocaleDateString('pt-BR');
+ const data = isoToBr(e('dv-data')?.value) || new Date().toLocaleDateString('pt-BR');
  if (!nome) { toast('Informe o nome do evento'); return; }
  const d = getDivideData();
  const ev = { id: 'ev-' + Date.now(), nome, data, membros: [], contas: [] };
@@ -8750,13 +8807,13 @@ function confirmFinLimparTudo() {
  <input type="checkbox" value="${m}" ${!editItem || editItem.participantes.includes(m) ? 'checked' : ''} onclick="event.stopPropagation()" style="width:16px;height:16px;cursor:pointer;accent-color:var(--green);flex-shrink:0">
  <span style="font-size:14px;font-weight:500;color:var(--text)">${m}</span>
  </div>`).join('');
- const hoje = new Date().toLocaleDateString('pt-BR');
+ const hoje = new Date().toISOString().slice(0, 10);
 
  e('modal-title').textContent = editId ? 'Editar Conta' : 'Nova Conta';
  e('modal-body').innerHTML = `
  <div class="frow"><label>Descrição</label><input id="da-desc" placeholder="Ex: Restaurante, Uber..." value="${editItem ? editItem.descricao : ''}"></div>
  <div class="frow-half">
- <div class="frow"><label>Data</label><input id="da-data" type="text" value="${editItem ? editItem.data : hoje}" placeholder="dd/mm/aaaa"></div>
+ <div class="frow"><label>Data</label><input id="da-data" type="date" value="${editItem ? brToIso(editItem.data) : hoje}"></div>
  <div class="frow"><label>Valor (R$)</label><input id="da-valor" type="text" value="${editItem ? String(editItem.valor).replace('.', ',') : ''}" placeholder="0,00"></div>
  </div>
  <div class="frow"><label>Quem pagou</label><select id="da-pago">${membrosOpts}</select></div>
@@ -8801,7 +8858,7 @@ function confirmFinLimparTudo() {
 
  function divideSalvarConta() {
  const desc = e('da-desc')?.value.trim();
- const data = e('da-data')?.value.trim() || new Date().toLocaleDateString('pt-BR');
+ const data = isoToBr(e('da-data')?.value) || new Date().toLocaleDateString('pt-BR');
  const valorRaw = e('da-valor')?.value.replace(',', '.');
  const valor = parseFloat(valorRaw);
  const pagoPor = e('da-pago')?.value;
