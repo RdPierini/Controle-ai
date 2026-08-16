@@ -1437,6 +1437,11 @@
  background: var(--green-l)
  }
 
+ .btn-outline-active {
+ background: var(--green-l);
+ border-color: var(--green-solid, var(--green))
+ }
+
  .btn-sm {
  padding: 4px 10px;
  font-size: 12px
@@ -4371,7 +4376,10 @@ body.dark .stat-card:hover {
  <div id="cob-content" style="display:none">
  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
  <h2 style="font-size:22px;font-weight:800">Cobra Aí</h2>
+ <div style="display:flex;gap:8px;flex-wrap:wrap">
+ <button class="btn btn-outline btn-sm" id="cob-notif-btn" onclick="toggleCobNotificacoes()">🔔 Ativar Notificações</button>
  <button class="btn btn-g btn-sm" onclick="openCobModal()">+ Nova Cobrança</button>
+ </div>
  </div>
  <div class="cards" id="cob-resumo-cards" style="margin-bottom:18px"></div>
  <div id="cob-lista"></div>
@@ -8225,6 +8233,7 @@ function confirmFinLimparTudo() {
  }
 
  function renderCobraAi() {
+ atualizarBotaoCobNotif();
  const lista = loadCobrancas();
  const empty = e('cob-empty'), content = e('cob-content');
  if (!lista.length) {
@@ -8398,6 +8407,74 @@ function confirmFinLimparTudo() {
  saveCobrancas(lista);
  openCobDetalheModal(id);
  renderCobraAi();
+ }
+
+ // --- Notificações locais de cobrança ---
+ function atualizarBotaoCobNotif() {
+ const btn = e('cob-notif-btn');
+ if (!btn) return;
+ if (!('Notification' in window)) { btn.style.display = 'none'; return; }
+ if (Notification.permission === 'granted' && localStorage.getItem('cobNotifAtivo') === '1') {
+ btn.textContent = '🔔 Notificações ativas';
+ btn.classList.add('btn-outline-active');
+ } else {
+ btn.textContent = '🔔 Ativar Notificações';
+ btn.classList.remove('btn-outline-active');
+ }
+ }
+
+ async function toggleCobNotificacoes() {
+ if (!('Notification' in window)) { toast('Seu navegador não suporta notificações.'); return; }
+ const ativo = localStorage.getItem('cobNotifAtivo') === '1';
+ if (ativo) {
+ localStorage.setItem('cobNotifAtivo', '0');
+ atualizarBotaoCobNotif();
+ toast('Notificações de cobrança desativadas.');
+ return;
+ }
+ const perm = await Notification.requestPermission();
+ if (perm !== 'granted') { toast('Permissão de notificação negada.'); return; }
+ localStorage.setItem('cobNotifAtivo', '1');
+ atualizarBotaoCobNotif();
+ toast('Notificações ativadas! Você será avisado ao abrir o app.');
+ checarNotificacoesCobranca(true);
+ }
+
+ async function checarNotificacoesCobranca(forcar) {
+ if (localStorage.getItem('cobNotifAtivo') !== '1') return;
+ if (!('Notification' in window) || Notification.permission !== 'granted') return;
+ const hojeStr = new Date().toISOString().slice(0, 10);
+ if (!forcar && localStorage.getItem('cobNotifUltimoCheck') === hojeStr) return;
+ localStorage.setItem('cobNotifUltimoCheck', hojeStr);
+
+ const lista = loadCobrancas();
+ const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+ const pendentes = [];
+ lista.forEach(c => {
+ c.parcelas.forEach(p => {
+ if (p.pago) return;
+ const dataP = new Date(p.data + 'T00:00:00');
+ if (dataP <= hoje) pendentes.push({ pessoa: c.pessoa, valor: p.valor, data: p.data });
+ });
+ });
+ if (!pendentes.length) return;
+
+ const totalPendente = pendentes.reduce((s, p) =>s + p.valor, 0);
+ const titulo = pendentes.length === 1
+ ? `Cobrança pendente: ${pendentes[0].pessoa}`
+ : `${pendentes.length} cobranças pendentes`;
+ const corpo = pendentes.length === 1
+ ? `${pendentes[0].pessoa} te deve ${fmt(pendentes[0].valor)} (venceu em ${fmtDataBr(pendentes[0].data)})`
+ : `Total de ${fmt(totalPendente)} em atraso entre ${[...new Set(pendentes.map(p =>p.pessoa))].join(', ')}`;
+
+ try {
+ if (navigator.serviceWorker && navigator.serviceWorker.ready) {
+ const reg = await navigator.serviceWorker.ready;
+ reg.showNotification(titulo, { body: corpo, icon: 'icon-192.png', badge: 'icon-192.png', tag: 'cobra-ai' });
+ } else {
+ new Notification(titulo, { body: corpo, icon: 'icon-192.png' });
+ }
+ } catch (err) { console.warn('Notificação falhou:', err); }
  }
 
  // ═══════════════════════════════════════════════
@@ -9027,6 +9104,7 @@ function confirmFinLimparTudo() {
  setSyncStatus('ok', 'Sincronizado');
  setGreetName(fbUser.displayName);
  toast('Dados sincronizados do Google!');
+ checarNotificacoesCobranca(false);
  } catch (err) {
  setSyncStatus('warn', 'Erro ao carregar dados da nuvem');
  console.warn('Sync from cloud error:', err);
@@ -9117,6 +9195,7 @@ function confirmFinLimparTudo() {
 
  renderYearSel();
  showPage('dashboard');
+ setTimeout(() => checarNotificacoesCobranca(false), 1500);
  const ls = e('login-status');
  if (ls) ls.textContent = 'Verificando login...';
  loadFirebase().then(() => {
