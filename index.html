@@ -451,6 +451,237 @@
  }
  }
 
+ .dash-mes-pick {
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ background: var(--card-bg, #fff);
+ border: 1.5px solid var(--border);
+ border-radius: 10px;
+ padding: 7px 12px;
+ font-size: 13px;
+ font-weight: 700;
+ color: var(--text)
+ }
+
+ .dash-mes-pick-btn {
+ background: none;
+ border: none;
+ cursor: pointer;
+ color: var(--text-l);
+ font-size: 11px;
+ padding: 2px 4px;
+ border-radius: 6px;
+ transition: color .15s, background .15s
+ }
+
+ .dash-mes-pick-btn:hover {
+ color: var(--green-d);
+ background: var(--green-l)
+ }
+
+ /* ── Dashboard reorganizado: KPIs, resumo, destaques ── */
+ .kpi-strip {
+ display: grid;
+ grid-template-columns: repeat(4, 1fr);
+ gap: 14px;
+ margin-bottom: 20px
+ }
+
+ @media(max-width:900px) {
+ .kpi-strip {
+ grid-template-columns: repeat(2, 1fr)
+ }
+ }
+
+ .kpi-card {
+ display: flex;
+ align-items: center;
+ gap: 14px;
+ background: var(--card-bg, #fff);
+ border: 1.5px solid var(--border);
+ border-radius: 16px;
+ padding: 16px 18px;
+ box-shadow: 0 1px 3px rgba(0, 0, 0, .06);
+ min-width: 0
+ }
+
+ .kpi-ico {
+ width: 42px;
+ height: 42px;
+ border-radius: 12px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex-shrink: 0
+ }
+
+ .kpi-ico svg {
+ width: 19px;
+ height: 19px
+ }
+
+ .kpi-ico.green { background: var(--green-d, #2e7d32) }
+ .kpi-ico.red { background: var(--red-d, #c62828) }
+ .kpi-ico.blue { background: #1976d2 }
+
+ .kpi-body { min-width: 0 }
+
+ .kpi-label {
+ font-size: 12px;
+ color: var(--text-l);
+ font-weight: 600;
+ margin-bottom: 3px
+ }
+
+ .kpi-value {
+ font-size: 19px;
+ font-weight: 800;
+ color: var(--text);
+ line-height: 1.2;
+ white-space: nowrap
+ }
+
+ .kpi-delta {
+ font-size: 11px;
+ font-weight: 600;
+ margin-top: 3px
+ }
+
+ .kpi-delta.up { color: var(--green-d, #2e7d32) }
+ .kpi-delta.down { color: var(--red-d, #c62828) }
+ .kpi-delta.muted { color: var(--text-l); font-weight: 500 }
+
+ @media(max-width:480px) {
+ .kpi-card { padding: 12px 14px; gap: 10px }
+ .kpi-ico { width: 36px; height: 36px }
+ .kpi-value { font-size: 16px }
+ }
+
+ .grid3 {
+ display: grid;
+ grid-template-columns: 1.3fr 0.9fr 0.9fr;
+ gap: 16px;
+ margin-bottom: 20px
+ }
+
+ @media(max-width:1100px) {
+ .grid3 { grid-template-columns: 1fr 1fr }
+ .grid3 > :last-child { grid-column: 1 / -1 }
+ }
+
+ @media(max-width:700px) {
+ .grid3 { grid-template-columns: 1fr }
+ .grid3 > :last-child { grid-column: auto }
+ }
+
+ .resumo-ano-list { display: flex; flex-direction: column; gap: 14px }
+
+ .resumo-ano-row {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ gap: 10px;
+ padding-bottom: 12px;
+ border-bottom: 1px solid var(--border)
+ }
+
+ .resumo-ano-row:last-child { border-bottom: none; padding-bottom: 0 }
+
+ .resumo-ano-lbl {
+ display: flex;
+ align-items: center;
+ gap: 8px;
+ font-size: 13px;
+ font-weight: 600;
+ color: var(--text-l)
+ }
+
+ .resumo-ano-lbl svg { width: 15px; height: 15px; flex-shrink: 0 }
+ .resumo-ano-val { font-size: 16px; font-weight: 800; color: var(--text); white-space: nowrap }
+
+ .destaques-col-list { display: flex; flex-direction: column; gap: 12px }
+
+ .destaque-col-row {
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ cursor: pointer;
+ padding: 4px 0;
+ border-radius: 8px
+ }
+
+ .destaque-col-ico {
+ width: 30px;
+ height: 30px;
+ border-radius: 9px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex-shrink: 0
+ }
+
+ .destaque-col-ico svg { width: 15px; height: 15px }
+ .destaque-col-body { min-width: 0; flex: 1 }
+ .destaque-col-lbl { font-size: 11px; color: var(--text-l); font-weight: 600 }
+ .destaque-col-val { font-size: 13px; font-weight: 700; color: var(--text) }
+
+ .destaques-rapidos-row {
+ display: flex;
+ flex-wrap: wrap;
+ gap: 10px 8px;
+ align-items: stretch
+ }
+
+ .destaque-rapido-item {
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ cursor: pointer;
+ flex: 1 1 180px;
+ min-width: 0;
+ padding: 8px 10px;
+ border-radius: 12px;
+ border: 1px solid var(--border);
+ transition: background .15s
+ }
+
+ .destaque-rapido-item:hover { background: var(--bg-2, rgba(0,0,0,.03)) }
+
+ .destaque-rapido-ico {
+ width: 32px;
+ height: 32px;
+ border-radius: 50%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex-shrink: 0
+ }
+
+ .destaque-rapido-ico svg { width: 15px; height: 15px }
+ .destaque-rapido-lbl { font-size: 11px; color: var(--text-l); font-weight: 600 }
+ .destaque-rapido-val { font-size: 13px; font-weight: 700; color: var(--text) }
+
+ .top-cats-compact { display: flex; flex-direction: column; gap: 11px }
+
+ .top-cat-row-compact { display: flex; flex-direction: column; gap: 4px }
+
+ .top-cat-head-compact {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ font-size: 12.5px
+ }
+
+ .top-cat-bar-bg {
+ background: var(--bg-2, #f0f0f0);
+ border-radius: 6px;
+ height: 7px;
+ overflow: hidden
+ }
+
+ .top-cat-bar-fill { height: 100%; border-radius: 6px; transition: width .4s }
+
  .section {
  background: #fff;
  border-radius: 12px;
@@ -1236,6 +1467,106 @@
  font-weight: 700;
  color: var(--text);
  margin-right: 10px
+ }
+
+ .cob-parcela-val-wrap {
+ display: flex;
+ align-items: center;
+ gap: 6px;
+ margin-right: 10px
+ }
+
+ .dv-saldo-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+ gap: 12px;
+ margin-bottom: 20px
+ }
+
+ .dv-saldo-card {
+ display: flex;
+ align-items: center;
+ gap: 12px;
+ background: var(--card-bg, #fff);
+ border: 1.5px solid var(--border);
+ border-radius: 14px;
+ padding: 14px 16px
+ }
+
+ .dv-saldo-card.pos { border-color: rgba(76, 175, 80, .35) }
+ .dv-saldo-card.neg { border-color: rgba(239, 83, 80, .35) }
+
+ .dv-saldo-avatar {
+ width: 40px;
+ height: 40px;
+ border-radius: 50%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-weight: 800;
+ font-size: 15px;
+ color: #fff;
+ flex-shrink: 0
+ }
+
+ .dv-saldo-card.pos .dv-saldo-avatar { background: var(--green-d) }
+ .dv-saldo-card.neg .dv-saldo-avatar { background: var(--red-d) }
+ .dv-saldo-card.zero .dv-saldo-avatar { background: #9e9e9e }
+
+ .dv-saldo-body { min-width: 0 }
+ .dv-saldo-nome { font-weight: 700; font-size: 13.5px; margin-bottom: 2px; color: var(--text) }
+ .dv-saldo-val { font-size: 17px; font-weight: 800; line-height: 1.2 }
+ .dv-saldo-card.pos .dv-saldo-val { color: var(--green-d) }
+ .dv-saldo-card.neg .dv-saldo-val { color: var(--red-d) }
+ .dv-saldo-card.zero .dv-saldo-val { color: var(--text-l) }
+ .dv-saldo-tag { font-size: 11px; color: var(--text-l); margin-top: 1px }
+
+ .dv-transf-row {
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ padding: 12px 14px;
+ background: var(--bg);
+ border: 1.5px solid var(--border);
+ border-radius: 12px;
+ margin-bottom: 8px;
+ flex-wrap: wrap;
+ transition: opacity .15s
+ }
+
+ .dv-transf-pessoa {
+ display: flex;
+ align-items: center;
+ gap: 7px;
+ padding: 4px 10px;
+ border-radius: 20px;
+ font-weight: 700;
+ font-size: 12.5px
+ }
+
+ .dv-transf-de { background: rgba(239, 83, 80, .14); color: var(--red-d) }
+ .dv-transf-para { background: rgba(76, 175, 80, .14); color: var(--green-d) }
+
+ .dv-transf-btn {
+ margin-left: auto;
+ padding: 5px 14px;
+ border-radius: 20px;
+ border: none;
+ cursor: pointer;
+ font-size: 12px;
+ font-weight: 700;
+ transition: all .15s
+ }
+
+ .cob-parcela-edit-inp {
+ width: 84px;
+ padding: 5px 7px;
+ border: 1.5px solid var(--green-d);
+ border-radius: 7px;
+ font-size: 13px;
+ font-weight: 700;
+ color: var(--text);
+ background: var(--card-bg, #fff)
  }
 
  .gasto-card {
@@ -2822,7 +3153,7 @@
  }
 
  .sidebar {
- width: 252px;
+ width: 214px;
  background:
  radial-gradient(120% 90% at 8% 0%, rgba(255, 255, 255, .10), transparent 55%),
  radial-gradient(140% 80% at 100% 100%, rgba(0, 0, 0, .18), transparent 60%),
@@ -2877,7 +3208,7 @@
  }
 
  .sidebar-header {
- padding: 18px 16px;
+ padding: 16px 14px;
  display: flex;
  align-items: center;
  justify-content: space-between;
@@ -2911,7 +3242,7 @@
  }
 
  .sidebar-brand-title {
- font-size: 22px;
+ font-size: 18px;
  font-weight: 800
  }
 
@@ -2969,7 +3300,7 @@
  left: 0;
  right: auto;
  min-width: 0;
- width: calc(252px - 24px);
+ width: calc(214px - 24px);
  transform: none
  }
 
@@ -3000,7 +3331,7 @@
  color: var(--text-l);
  text-transform: uppercase;
  letter-spacing: .8px;
- padding: 14px 20px 6px
+ padding: 10px 18px 6px
  }
 
  .snav-btn {
@@ -3008,13 +3339,13 @@
  display: flex;
  align-items: center;
  gap: 10px;
- padding: 10px 14px;
+ padding: 8px 12px;
  border: none;
  background: none;
  cursor: pointer;
- font-size: 13.5px;
+ font-size: 13px;
  color: var(--text-l);
- border-radius: 10px;
+ border-radius: 9px;
  margin: 1px 8px;
  transition: all .15s;
  text-align: left
@@ -3032,10 +3363,17 @@
  }
 
  .snav-ico {
- font-size: 17px;
  flex-shrink: 0;
- width: 24px;
- text-align: center
+ width: 18px;
+ height: 18px;
+ display: flex;
+ align-items: center;
+ justify-content: center
+ }
+
+ .snav-ico svg {
+ width: 17px;
+ height: 17px
  }
 
  .snav-ico:empty,
@@ -3139,7 +3477,7 @@
 
  .app-content {
  flex: 1;
- margin-left: 252px;
+ margin-left: 214px;
  min-height: 100vh;
  display: flex;
  flex-direction: column;
@@ -3407,15 +3745,17 @@
  }
 
  .hcard-ico {
- width: 22px;
- height: 22px;
- border-radius: 50%;
+ width: 38px;
+ height: 38px;
+ border-radius: 11px;
  flex-shrink: 0;
- margin-top: 2px;
+ margin-top: 0;
  display: flex;
  align-items: center;
  justify-content: center
  }
+
+ .hcard-ico svg { width: 18px; height: 18px }
 
  .hcard-ico:empty {
  display: none
@@ -3423,6 +3763,13 @@
 
  .hcard-ico-status:empty {
  display: flex
+ }
+
+ .hcard-ico-status {
+ width: 22px;
+ height: 22px;
+ border-radius: 50%;
+ margin-top: 2px
  }
 
  .hcard-body {
@@ -3499,13 +3846,37 @@
  }
 
  .rule-card {
- background: #fff;
- border-radius: 12px;
- padding: 16px;
+ background: var(--card-bg, #fff);
+ border-radius: 14px;
+ padding: 18px 16px;
  box-shadow: var(--shadow);
  text-align: center;
- border-top: 4px solid
+ border: 1.5px solid var(--border);
+ border-top: none;
+ position: relative;
+ overflow: hidden
  }
+
+ .rule-card::before {
+ content: '';
+ position: absolute;
+ top: 0; left: 0; right: 0;
+ height: 4px;
+ background: var(--rule-accent, #9e9e9e)
+ }
+
+ .rule-ico {
+ width: 34px;
+ height: 34px;
+ border-radius: 10px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ margin: 2px auto 10px;
+ background: var(--rule-accent-l, rgba(0,0,0,.05))
+ }
+
+ .rule-ico svg { width: 17px; height: 17px }
 
  .rule-lbl {
  font-size: 10px;
@@ -4088,10 +4459,10 @@
  <nav class="snav">
  <div class="snav-sec">Menu</div>
  <button class="snav-btn active" data-p="dashboard" onclick="showPage('dashboard')">
- <span class="snav-ico"></span><span class="snav-lbl">Início</span>
+ <span class="snav-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span><span class="snav-lbl">Início</span>
  </button>
  <button class="snav-btn" id="snav-mes-btn" onclick="toggleMesesNav()">
- <span class="snav-ico"></span><span class="snav-lbl">Meses</span>
+ <span class="snav-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><span class="snav-lbl">Meses</span>
  <span class="snav-chev" id="snav-mes-chev">▾</span>
  </button>
  <div class="snav-months" id="snav-months">
@@ -4109,26 +4480,26 @@
  <div class="snav-mo" data-m="Dezembro" onclick="goMes('Dezembro')">Dez</div>
  </div>
  <button class="snav-btn" data-p="investimentos" onclick="showPage('investimentos')">
- <span class="snav-ico"></span><span class="snav-lbl">Investe Aí</span>
+ <span class="snav-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span class="snav-lbl">Investe Aí</span>
  </button>
  <button class="snav-btn" data-p="financiamento" onclick="showPage('financiamento')">
- <span class="snav-ico"></span><span class="snav-lbl">Financia Aí</span>
+ <span class="snav-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h1M9 13h1M14 9h1M14 13h1"/></svg></span><span class="snav-lbl">Financia Aí</span>
  </button>
  <button class="snav-btn" data-p="cobra" onclick="showPage('cobra')">
- <span class="snav-ico"></span><span class="snav-lbl">Cobra Aí</span>
+ <span class="snav-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg></span><span class="snav-lbl">Cobra Aí</span>
  </button>
  <button class="snav-btn" data-p="divide" onclick="showPage('divide')">
- <span class="snav-ico"></span><span class="snav-lbl">Divide Aí</span>
+ <span class="snav-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="4"/><circle cx="16" cy="8" r="4"/><path d="M2 20c0-3.5 2.5-6 6-6s6 2.5 6 6"/><path d="M10 20c0-3.5 2.5-6 6-6s6 2.5 6 6"/></svg></span><span class="snav-lbl">Divide Aí</span>
  </button>
  <button class="snav-btn" data-p="notas" onclick="showPage('notas')">
- <span class="snav-ico"></span><span class="snav-lbl">Anote Aí</span>
+ <span class="snav-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg></span><span class="snav-lbl">Anote Aí</span>
  </button>
  <button class="snav-btn" data-p="saude" onclick="showPage('saude')">
- <span class="snav-ico"></span><span class="snav-lbl">Saúde Financeira</span>
+ <span class="snav-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span><span class="snav-lbl">Saúde Financeira</span>
  </button>
  <hr class="snav-div">
  <button class="snav-btn" data-p="config" onclick="showPage('config')">
- <span class="snav-ico"></span><span class="snav-lbl">Configurações</span>
+ <span class="snav-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span><span class="snav-lbl">Configurações</span>
  </button>
  </nav>
  <div class="sidebar-footer">
@@ -4180,13 +4551,20 @@
  <div class="dash-hero-title">Olá, <span id="dash-greet-name"></span></div>
  <div class="dash-hero-sub">Aqui está o resumo da sua vida financeira.</div>
  </div>
+ <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+ <div class="dash-mes-pick">
+ <button class="dash-mes-pick-btn" onclick="dashNavMes(-1)" title="Mês anterior">◀</button>
+ <span id="dash-titulo-mes"></span>
+ <button class="dash-mes-pick-btn" onclick="dashNavMes(1)" title="Próximo mês">▶</button>
+ </div>
  <div class="add-tx-wrap">
- <button class="btn btn-g btn-sm" onclick="toggleAddTxMenu()">+ Adicionar transação</button>
+ <button class="btn btn-g btn-sm" onclick="toggleAddTxMenu()">+ Adicionar transação</button>>
  <div class="add-tx-menu" id="addTxMenu">
  <button onclick="quickAddTx('ent')">Entrada</button>
  <button onclick="quickAddTx('gf')">Gasto Fixo</button>
  <button onclick="quickAddTx('gv')">Gasto Variável</button>
  <button onclick="quickAddTx('inv')">Investimento</button>
+ </div>
  </div>
  </div>
  </div>
@@ -4197,28 +4575,45 @@
  </div>
  <div class="cards" id="dash-saldo-banco-cards"></div>
  </div>
- <div class="cards" id="dash-cards"></div>
+
+ <!-- KPIs principais -->
+ <div class="kpi-strip" id="dash-cards"></div>
+
+ <!-- Gráfico mensal consolidado + Top Categorias -->
  <div class="grid2">
  <div class="section" style="display:flex;flex-direction:column">
- <div class="sec-title" style="margin-bottom:12px">Entradas vs Saídas por Mês</div>
+ <div class="sec-title" style="margin-bottom:12px">Entradas, Saídas e Investimentos por Mês</div>
  <div class="chart-wrap"><canvas id="chart-anual"></canvas></div>
- <div id="dash-anual-stats" style="margin-top:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;align-content:start">
- </div>
  </div>
  <div class="section">
- <div class="sec-title" style="margin-bottom:12px">Navegação por Mês</div>
- <div class="month-grid" id="month-grid"></div>
+ <div class="sec-header">
+ <div class="sec-title">Top Categorias do Ano</div>
+ <a href="#" class="link-ver-todas" id="dash-top-cats-ver-todas" style="font-size:12.5px;font-weight:700;color:var(--green-d);text-decoration:none;display:none" onclick="saudeAba='anual';showPage('saude');return false">Ver todas →</a>
+ </div>
+ <div class="top-cats-compact" id="dash-top-cats"></div>
  </div>
  </div>
- <div class="grid2">
+
+ <!-- Evolução do saldo + Resumo do ano + Destaques -->
+ <div class="grid3">
  <div class="section">
- <div class="sec-title" style="margin-bottom:12px">Evolução do Saldo Mensal</div>
+ <div class="sec-title" style="margin-bottom:12px">Evolução do Saldo</div>
  <div class="chart-wrap"><canvas id="chart-saldo"></canvas></div>
  </div>
  <div class="section">
- <div class="sec-title" style="margin-bottom:12px">Top Categorias do Ano</div>
- <div id="dash-top-cats"></div>
+ <div class="sec-title" style="margin-bottom:14px">Resumo do Ano</div>
+ <div class="resumo-ano-list" id="dash-resumo-ano"></div>
  </div>
+ <div class="section">
+ <div class="sec-title" style="margin-bottom:12px">Destaques</div>
+ <div class="destaques-col-list" id="dash-destaques-col"></div>
+ </div>
+ </div>
+
+ <!-- Destaques rápidos -->
+ <div class="section" style="margin-bottom:0">
+ <div class="sec-title" style="margin-bottom:14px">Destaques rápidos</div>
+ <div class="destaques-rapidos-row" id="dash-destaques-rapidos"></div>
  </div>
  </div>
 
@@ -5114,7 +5509,22 @@
  return null;
  }
 
- function saveData(d) { localStorage.setItem(sKey(ano), JSON.stringify(d)); scheduleSync(); }
+ function saveData(d) {
+ localStorage.setItem(sKey(ano), JSON.stringify(d));
+ registrarAnoComDados(ano);
+ scheduleSync();
+ }
+
+ // Registra o ano na lista de anos disponíveis (sidebar) só quando ele
+ // realmente passa a ter dados salvos — navegar até o ano não basta.
+ function registrarAnoComDados(y) {
+ const ys = getYears();
+ if (!ys.includes(y)) {
+ ys.push(y); ys.sort((a, b) =>a - b);
+ saveYears(ys);
+ renderYearSel();
+ }
+ }
 
  // Load/save para o ano selecionado em Investimentos (pode ser diferente do ano global)
  function loadInvData() {
@@ -5127,6 +5537,7 @@
  function saveInvData(d) {
  const y = invAno || ano;
  localStorage.setItem(sKey(y), JSON.stringify(d));
+ registrarAnoComDados(y);
  scheduleSync();
  }
  function navInvAno(dir) {
@@ -5327,29 +5738,28 @@
  renderMes();
  }
 
+ function dashNavMes(dir) {
+ const idx = MESES.indexOf(mesSel);
+ const ni = idx + dir;
+ if (ni >= 0 && ni < 12) {
+ mesSel = MESES[ni];
+ } else if (ni < 0) {
+ ano = ano - 1; renderYearSel(); mesSel = 'Dezembro';
+ } else {
+ ano = ano + 1; renderYearSel(); mesSel = 'Janeiro';
+ }
+ renderDashboard();
+ }
+
  function navMes(dir) {
  const idx = MESES.indexOf(mesSel);
  const ni = idx + dir;
  if (ni >= 0 && ni < 12) {
  goMes(MESES[ni]);
  } else if (ni < 0) {
- const prevAno = ano - 1;
- let ys = getYears();
- if (!ys.includes(prevAno)) {
- if (!confirm(`Ir para ${prevAno}? O ano ainda não existe e será criado.`)) return;
- ys.push(prevAno); ys.sort(); saveYears(ys);
- localStorage.setItem(sKey(prevAno), JSON.stringify(createEmptyYear()));
- }
- ano = prevAno; renderYearSel(); goMes('Dezembro');
+ ano = ano - 1; renderYearSel(); goMes('Dezembro');
  } else {
- const nextAno = ano + 1;
- let ys = getYears();
- if (!ys.includes(nextAno)) {
- if (!confirm(`Ir para ${nextAno}? O ano ainda não existe e será criado.`)) return;
- ys.push(nextAno); ys.sort(); saveYears(ys);
- localStorage.setItem(sKey(nextAno), JSON.stringify(createEmptyYear()));
- }
- ano = nextAno; renderYearSel(); goMes('Janeiro');
+ ano = ano + 1; renderYearSel(); goMes('Janeiro');
  }
  }
 
@@ -5442,107 +5852,158 @@
  return `<div class="card-delta ${bom ? 'up' : 'down'}">${subiu ? '▲' : '▼'} ${Math.abs(pct).toFixed(1)}% vs ano anterior</div>`;
  }
 
+ // Ícones SVG compartilhados pelos KPIs/Resumo/Destaques do dashboard
+ const dashIco = {
+ entradas: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>`,
+ saidas: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>`,
+ invest: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>`,
+ saldo: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>`,
+ up: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>`,
+ down: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>`,
+ gastos: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>`,
+ shield: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>`,
+ star: `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.63 22 9.24 16.5 13.97 18.18 21 12 17.27 5.82 21 7.5 13.97 2 9.24 8.91 8.63"></polygon></svg>`
+ };
+
+ function deltaKpiHtml(atual, anterior, temDados, inverte) {
+ if (!temDados) return `<div class="kpi-delta muted">Sem dados do mês anterior</div>`;
+ if (anterior === 0) {
+ if (atual === 0) return `<div class="kpi-delta muted">Igual ao mês anterior</div>`;
+ return `<div class="kpi-delta ${inverte ? 'down' : 'up'}">${atual >0 ? '▲' : '▼'} novo vs. mês anterior</div>`;
+ }
+ const pct = ((atual - anterior) / Math.abs(anterior)) * 100;
+ const subiu = pct >= 0;
+ const bom = inverte ? !subiu : subiu;
+ return `<div class="kpi-delta ${bom ? 'up' : 'down'}">${subiu ? '▲' : '▼'} ${Math.abs(pct).toFixed(1)}% vs. mês anterior</div>`;
+ }
+
  function renderDashboard() {
  const d = loadData();
  const isDark = document.body.classList.contains('dark');
  const s = calcAno(d);
- const prevRaw = loadDataYear(ano - 1);
- const sPrev = prevRaw ? calcAno(prevRaw) : null;
- const mesComDados = MESES.filter(m => { const c = calcMes(d, m); return c.ent >0 || c.saidas >0; }).length || 1;
- const mediaSaidas = s.saidas / mesComDados;
- const taxaPoupDash = s.ent >0 ? (s.inv / s.ent * 100).toFixed(1) + '%' : '—';
- const comprDash = s.ent >0 ? (s.saidas / s.ent * 100).toFixed(1) + '%' : '—';
+
+ // KPIs principais: mês atual (mesSel) vs mês anterior
+ const cMes = calcMes(d, mesSel);
+ const prevInfo = mesAnteriorInfo(mesSel, ano);
+ const temPrev = !!prevInfo.dados;
+ const cPrev = temPrev ? calcMes(prevInfo.dados, prevInfo.mes) : null;
+
+ const dashTitleEl = e('dash-titulo-mes');
+ if (dashTitleEl) dashTitleEl.textContent = ano === HOJE.getFullYear() ? mesSel : (mesSel + ' / ' + ano);
+
  e('dash-cards').innerHTML = `
- <div class="card green"><div class="card-label">Total Entradas</div><div class="card-value">${fmt(s.ent)}</div>${deltaHtml(s.ent, sPrev?.ent, !!sPrev, false)}</div>
- <div class="card red"><div class="card-label">Total Saídas</div><div class="card-value">${fmt(s.saidas)}</div>${deltaHtml(s.saidas, sPrev?.saidas, !!sPrev, true)}</div>
- <div class="card red"><div class="card-label">Gastos Fixos</div><div class="card-value">${fmt(s.gf)}</div>${deltaHtml(s.gf, sPrev?.gf, !!sPrev, true)}</div>
- <div class="card red"><div class="card-label">Gastos Variáveis</div><div class="card-value">${fmt(s.gv)}</div>${deltaHtml(s.gv, sPrev?.gv, !!sPrev, true)}</div>
- <div class="card blue"><div class="card-label">Total Investido</div><div class="card-value">${fmt(s.inv)}</div>${deltaHtml(s.inv, sPrev?.inv, !!sPrev, false)}</div>
- <div class="card ${s.saldo >= 0 ? 'green' : 'red'}"><div class="card-label">Saldo Anual</div><div class="card-value">${fmtSigned(s.saldo)}</div>${deltaHtml(s.saldo, sPrev?.saldo, !!sPrev, false)}</div>
- <div class="card blue"><div class="card-label">Taxa de Poupança</div><div class="card-value">${taxaPoupDash}</div></div>
- <div class="card red"><div class="card-label">Média Mensal Saídas</div><div class="card-value">${fmt(mediaSaidas)}</div></div>
+ <div class="kpi-card">
+ <div class="kpi-ico green">${dashIco.entradas}</div>
+ <div class="kpi-body">
+ <div class="kpi-label">Entradas</div>
+ <div class="kpi-value">${fmt(cMes.ent)}</div>
+ ${deltaKpiHtml(cMes.ent, cPrev?.ent, temPrev, false)}
+ </div>
+ </div>
+ <div class="kpi-card">
+ <div class="kpi-ico red">${dashIco.saidas}</div>
+ <div class="kpi-body">
+ <div class="kpi-label">Saídas</div>
+ <div class="kpi-value">${fmt(cMes.saidas)}</div>
+ ${deltaKpiHtml(cMes.saidas, cPrev?.saidas, temPrev, true)}
+ </div>
+ </div>
+ <div class="kpi-card">
+ <div class="kpi-ico blue">${dashIco.invest}</div>
+ <div class="kpi-body">
+ <div class="kpi-label">Investimentos</div>
+ <div class="kpi-value">${fmt(cMes.inv)}</div>
+ ${deltaKpiHtml(cMes.inv, cPrev?.inv, temPrev, false)}
+ </div>
+ </div>
+ <div class="kpi-card">
+ <div class="kpi-ico ${cMes.saldo >= 0 ? 'green' : 'red'}">${dashIco.saldo}</div>
+ <div class="kpi-body">
+ <div class="kpi-label">Saldo</div>
+ <div class="kpi-value">${fmtSigned(cMes.saldo)}</div>
+ ${deltaKpiHtml(cMes.saldo, cPrev?.saldo, temPrev, false)}
+ </div>
+ </div>
  `;
  renderSaldoBanco('dash-saldo-banco-cards');
-
- const mg = e('month-grid');
- mg.innerHTML = MESES.map((m, i) => {
- const c = calcMes(d, m);
- const hasData = c.ent >0 || c.saidas >0 || c.inv >0;
- const isCur = m === mesSel;
- return `<div class="mc ${hasData ? '' : 'empty'}${isCur ? 'current' : ''}" onclick="goMes('${m}')">
- <div class="mc-name">${isCur ? '<span class="mc-dot"></span>' : ''}${m}</div>
- ${hasData ? `
- <div class="mc-row">
- <span class="mc-lbl">Entradas:</span>
- <span class="mc-val">${fmt(c.ent)}</span>
- </div>
- <div class="mc-row">
- <span class="mc-lbl">Saídas:</span>
- <span class="mc-val">${fmt(c.saidas)}</span>
- </div>
- <div class="mc-row">
- <span class="mc-lbl">Investido:</span>
- <span class="mc-val">${fmt(c.inv)}</span>
- </div>
- <div class="mc-saldo ${c.saldo >= 0 ? 'pos' : 'neg'}">
- ${fmtSigned(c.saldo)}
- </div>
- `: `<div style="font-size:12px;color:var(--text-l);margin-top:6px">Sem dados</div>`}
- </div>`;
- }).join('');
 
  renderChartAnual(d);
  renderChartSaldo(d);
  renderTopCats(d);
- renderAnualStats(d);
+ renderResumoAno(d, s);
+ renderDestaquesDashboard(d);
  }
 
- function renderAnualStats(d) {
- const el = e('dash-anual-stats');
+ function renderResumoAno(d, s) {
+ const el = e('dash-resumo-ano');
  if (!el) return;
- 
+ const row = (ico, cor, label, val) => `
+ <div class="resumo-ano-row">
+ <div class="resumo-ano-lbl" style="color:${cor}">${ico}<span style="color:var(--text-l)">${label}</span></div>
+ <div class="resumo-ano-val">${val}</div>
+ </div>`;
+ const icoEntC = dashIco.entradas.replace('#fff', 'currentColor');
+ const icoSaiC = dashIco.saidas.replace('#fff', 'currentColor');
+ const icoInvC = dashIco.invest.replace('#fff', 'currentColor');
+ const icoSaldoC = dashIco.saldo.replace('#fff', 'currentColor');
+ el.innerHTML =
+ row(icoEntC, 'var(--green-d)', 'Entradas', fmt(s.ent)) +
+ row(icoSaiC, 'var(--red-d)', 'Saídas', fmt(s.saidas)) +
+ row(icoInvC, '#1976d2', 'Investimentos', fmt(s.inv)) +
+ row(icoSaldoC, s.saldo >= 0 ? 'var(--green-d)' : 'var(--red-d)', 'Saldo', fmtSigned(s.saldo));
+ }
+
+ function calcDestaquesAno(d) {
  const mesesDados = MESES.map(m => ({ m, c: calcMes(d, m) })).filter(x => x.c.ent > 0 || x.c.saidas > 0);
- if (!mesesDados.length) { el.innerHTML = ''; return; }
- 
+ if (!mesesDados.length) return null;
  const melhorMes = mesesDados.reduce((a, b) => b.c.saldo > a.c.saldo ? b : a);
  const piorMes = mesesDados.reduce((a, b) => b.c.saldo < a.c.saldo ? b : a);
  const maiorGasto = mesesDados.reduce((a, b) => b.c.saidas > a.c.saidas ? b : a);
  const maiorEnt = mesesDados.reduce((a, b) => b.c.ent > a.c.ent ? b : a);
  const maiorInv = mesesDados.reduce((a, b) => b.c.inv > a.c.inv ? b : a);
- const mediaMensal = mesesDados.reduce((s, x) => s + x.c.saidas, 0) / mesesDados.length;
+ return {
+ melhor: { ico: dashIco.star, label: 'Melhor mês', cor: '#43a047', bg: 'rgba(67,160,71,.18)', mes: melhorMes.m, val: fmtSigned(melhorMes.c.saldo) },
+ pior: { ico: dashIco.down, label: 'Pior saldo', cor: '#e53935', bg: 'rgba(229,57,53,.18)', mes: piorMes.m, val: fmtSigned(piorMes.c.saldo) },
+ gastos: { ico: dashIco.gastos, label: 'Mais gastos', cor: '#f9a825', bg: 'rgba(249,168,37,.18)', mes: maiorGasto.m, val: fmt(maiorGasto.c.saidas) },
+ entrada: { ico: dashIco.up, label: 'Maior entrada', cor: '#43a047', bg: 'rgba(67,160,71,.18)', mes: maiorEnt.m, val: fmt(maiorEnt.c.ent) },
+ invest: { ico: dashIco.shield, label: 'Mais investido', cor: '#5c6bc0', bg: 'rgba(92,107,192,.18)', mes: maiorInv.c.inv > 0 ? maiorInv.m : '—', val: maiorInv.c.inv > 0 ? fmt(maiorInv.c.inv) : 'Sem dados' }
+ };
+ }
 
- el.removeAttribute('style');
- el.className = 'stats-grid';
+ function renderDestaquesDashboard(d) {
+ const elCol = e('dash-destaques-col');
+ const elRow = e('dash-destaques-rapidos');
+ if (!elCol && !elRow) return;
+ const dest = calcDestaquesAno(d);
+ if (!dest) {
+ if (elCol) elCol.innerHTML = '<div style="color:var(--text-l);font-size:13px">Sem dados ainda</div>';
+ if (elRow) elRow.innerHTML = '<div style="color:var(--text-l);font-size:13px">Sem dados ainda</div>';
+ return;
+ }
+ const items = [dest.melhor, dest.pior, dest.gastos, dest.entrada, dest.invest];
 
- // Nova estrutura do Card (agora o ícone recebe a cor de destaque do próprio card)
- const stat = (ico, label, destaqueValor, sub, corDestaque, mesClick) => `
- <div class="stat-card" ${mesClick ? `onclick="goMes('${mesClick}')" title="Ir para ${mesClick}"` : ''}>
-   <div class="stat-card-header">
-     <div class="stat-card-ico" style="color: ${corDestaque || 'var(--text-l)'}">${ico}</div>
-     <div style="font-size:10px; font-weight:700; color:var(--text-l); text-transform:uppercase; letter-spacing:0.5px; text-align:right;">${label}</div>
-   </div>
-   <div>
-     <div style="font-size:17px; font-weight:800; color:${corDestaque || 'var(--text)'}; line-height:1.2;">${destaqueValor}</div>
-     ${sub ? `<div style="font-size:13px; font-weight:500; color:var(--text-l); margin-top:2px;">${sub}</div>` : ''}
-   </div>
- </div>`;
+ if (elCol) {
+ elCol.innerHTML = items.map(it => `
+ <div class="destaque-col-row" onclick="goMes('${it.mes}')" title="Ir para ${it.mes}">
+ <div class="destaque-col-ico" style="color:${it.cor};background:${it.bg}">${it.ico}</div>
+ <div class="destaque-col-body">
+ <div class="destaque-col-lbl">${it.label}</div>
+ <div class="destaque-col-val">${it.mes} · ${it.val}</div>
+ </div>
+ </div>`).join('');
+ }
 
- // Ícones SVG profissionais (minimalistas)
- const icoUp = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>`;
- const icoDown = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>`;
- const icoCard = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>`;
- const icoIn = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>`;
- const icoShield = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>`;
- const icoBar = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>`;
-
- el.innerHTML =
-   stat(icoUp, 'Melhor Saldo', melhorMes.m, fmtSigned(melhorMes.c.saldo), melhorMes.c.saldo >= 0 ? 'var(--green-d)' : 'var(--red-d)', melhorMes.m) +
-   stat(icoDown, 'Pior Saldo', piorMes.m, fmtSigned(piorMes.c.saldo), 'var(--red-d)', piorMes.m) +
-   stat(icoCard, 'Mais Gastos', maiorGasto.m, fmt(maiorGasto.c.saidas), '', maiorGasto.m) +
-   stat(icoIn, 'Maior Entrada', maiorEnt.m, fmt(maiorEnt.c.ent), 'var(--green-d)', maiorEnt.m) +
-   stat(icoShield, 'Mais Investido', maiorInv.c.inv > 0 ? maiorInv.m : '—', maiorInv.c.inv > 0 ? fmt(maiorInv.c.inv) : 'Sem dados', '#1976d2', maiorInv.c.inv > 0 ? maiorInv.m : null) +
-   stat(icoBar, 'Média Mensal', fmt(mediaMensal), `gastos em ${mesesDados.length} meses`, '');
-}
+ if (elRow) {
+ elRow.innerHTML = items.map(it => `
+ <div class="destaque-rapido-item" onclick="goMes('${it.mes}')" title="Ir para ${it.mes}">
+ <div class="destaque-rapido-ico" style="color:${it.cor};background:${it.bg}">${it.ico}</div>
+ <div>
+ <div class="destaque-rapido-lbl">${it.label}</div>
+ <div class="destaque-rapido-val">${it.mes} · ${it.val}</div>
+ </div>
+ </div>`).join('');
+ }
+ }
  function setChartDarkDefaults() {
  if (typeof Chart === 'undefined') return;
  const isDark = document.body.classList.contains('dark');
@@ -5577,7 +6038,24 @@
  { label: 'Investido', data: invData, backgroundColor: corInv, borderRadius: 4 }
  ]
  },
- options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: legendColor, usePointStyle: true, pointStyle: 'circle' } }, datalabels: { display: false } }, scales: { y: { ticks: { color: tickColor, callback: v => 'R$' + v.toLocaleString('pt-BR') }, grid: { color: gridColor } }, x: { ticks: { color: tickColor }, grid: { display: false } } } }
+ options: {
+ responsive: true, maintainAspectRatio: false,
+ plugins: {
+ legend: { position: 'bottom', labels: { color: legendColor, usePointStyle: true, pointStyle: 'circle' } },
+ datalabels: { display: false },
+ tooltip: {
+ callbacks: {
+ afterBody: (items) => {
+ if (!items.length) return '';
+ const idx = items[0].dataIndex;
+ const saldoMes = entData[idx] - saiData[idx] - invData[idx];
+ return ['', `Saldo: ${fmtSigned(saldoMes)}`];
+ }
+ }
+ }
+ },
+ scales: { y: { ticks: { color: tickColor, callback: v => 'R$' + v.toLocaleString('pt-BR') }, grid: { color: gridColor } }, x: { ticks: { color: tickColor }, grid: { display: false } } }
+ }
  });
  }
 
@@ -5624,18 +6102,21 @@
  totais[g.categoria] += g.valor;
  });
  });
- const sorted = Object.entries(totais).sort((a, b) =>b[1] - a[1]).slice(0, 7);
+ const todas = Object.entries(totais).sort((a, b) =>b[1] - a[1]);
+ const sorted = todas.slice(0, 7);
+ const verTodasEl = e('dash-top-cats-ver-todas');
+ if (verTodasEl) verTodasEl.style.display = todas.length > sorted.length ? '' : 'none';
  if (!sorted.length) { el.innerHTML = '<div style="color:var(--text-l);font-size:13px;text-align:center;padding:20px">Sem dados ainda</div>'; return; }
  const max = sorted[0][1];
  const cores = ['#c62828', '#e53935', '#ef5350', '#e57373', '#ef9a9a', '#ffcdd2', '#ffebee'];
  el.innerHTML = sorted.map(([cat, val], i) => `
- <div style="margin-bottom:10px">
- <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px">
+ <div class="top-cat-row-compact">
+ <div class="top-cat-head-compact">
  <span style="font-weight:500;color:var(--text)">${cat}</span>
  <span style="font-weight:700;color:#c62828">${fmt(val)}</span>
  </div>
- <div style="background:#f0f0f0;border-radius:6px;height:8px;overflow:hidden">
- <div style="height:100%;width:${(val / max * 100).toFixed(1)}%;background:${cores[i] || '#ef9a9a'};border-radius:6px;transition:width .4s"></div>
+ <div class="top-cat-bar-bg">
+ <div class="top-cat-bar-fill" style="width:${(val / max * 100).toFixed(1)}%;background:${cores[i] || '#ef9a9a'}"></div>
  </div>
  </div>
  `).join('');
@@ -6528,41 +7009,51 @@
 
  // ── Métricas ──
  const c = v =>Math.min(100, v);
+ const icoPoup = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1.5 2-3h2v-4h-2c0-1-.5-1.7-1-2z"/><path d="M2 9v1"/><path d="M13.5 7.5V6"/></svg>`;
+ const icoComprom = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>`;
+ const icoReserva = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`;
+ const icoConsist = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`;
+ const icoMedia = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`;
+ const icoFixoVar = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v12"/><path d="M14 21V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v15"/><line x1="2" y1="21" x2="22" y2="21"/></svg>`;
+ const corPoup = taxaPoup >= 20 ? '#4caf50' : taxaPoup >= 10 ? '#ffa726' : '#ef5350';
+ const corCompr = compr <= 70 ? '#4caf50' : compr <= 85 ? '#ffa726' : '#ef5350';
+ const corReserva = reserva >= 6 ? '#4caf50' : reserva >= 3 ? '#ffa726' : '#ef5350';
+ const corConsist = consist >= 80 ? '#4caf50' : consist >= 50 ? '#ffa726' : '#ef5350';
  e('saude-metrics').innerHTML = `
- <div class="hcard"><div class="hcard-ico"></div><div class="hcard-body">
+ <div class="hcard"><div class="hcard-ico" style="background:${corPoup}">${icoPoup}</div><div class="hcard-body">
  <div class="hcard-lbl">Taxa de Poupança</div>
  <div class="hcard-val" style="color:${taxaPoup >= 20 ? dkGreen : taxaPoup >= 10 ? dkOrange : dkRed}">${taxaPoup.toFixed(1)}%</div>
- <div class="hcard-bar"><div class="hcard-fill" style="width:${c(taxaPoup / 30 * 100)}%;background:${taxaPoup >= 20 ? '#4caf50' : '#ffa726'}"></div></div>
+ <div class="hcard-bar"><div class="hcard-fill" style="width:${c(taxaPoup / 30 * 100)}%;background:${corPoup}"></div></div>
  <div class="hcard-note">Ideal: ≥ 20% da renda mensal</div>
  </div></div>
- <div class="hcard"><div class="hcard-ico"></div><div class="hcard-body">
+ <div class="hcard"><div class="hcard-ico" style="background:${corCompr}">${icoComprom}</div><div class="hcard-body">
  <div class="hcard-lbl">Comprometimento da Renda</div>
  <div class="hcard-val" style="color:${compr <= 70 ? dkGreen : compr <= 85 ? dkOrange : dkRed}">${compr.toFixed(1)}%</div>
- <div class="hcard-bar"><div class="hcard-fill" style="width:${c(compr)}%;background:${compr <= 70 ? '#4caf50' : compr <= 85 ? '#ffa726' : '#ef5350'}"></div></div>
+ <div class="hcard-bar"><div class="hcard-fill" style="width:${c(compr)}%;background:${corCompr}"></div></div>
  <div class="hcard-note">Ideal: ≤ 70% — você está ${compr <= 70 ? 'dentro ' : 'acima '} do limite</div>
  </div></div>
- <div class="hcard"><div class="hcard-ico"></div><div class="hcard-body">
+ <div class="hcard"><div class="hcard-ico" style="background:${corReserva}">${icoReserva}</div><div class="hcard-body">
  <div class="hcard-lbl">Reserva de Emergência</div>
  <div class="hcard-val" style="color:${reserva >= 6 ? dkGreen : reserva >= 3 ? dkOrange : dkRed}">${reserva >= 0 ? reserva.toFixed(1) + 'meses' : '—'}</div>
- <div class="hcard-bar"><div class="hcard-fill" style="width:${c(reserva / 6 * 100)}%;background:${reserva >= 6 ? '#4caf50' : reserva >= 3 ? '#ffa726' : '#ef5350'}"></div></div>
+ <div class="hcard-bar"><div class="hcard-fill" style="width:${c(reserva / 6 * 100)}%;background:${corReserva}"></div></div>
  <div class="hcard-note">Ideal: ≥ 6 meses de gastos guardados</div>
  </div></div>
- <div class="hcard"><div class="hcard-ico"></div><div class="hcard-body">
+ <div class="hcard"><div class="hcard-ico" style="background:${corConsist}">${icoConsist}</div><div class="hcard-body">
  <div class="hcard-lbl">Consistência Investindo</div>
  <div class="hcard-val" style="color:${consist >= 80 ? dkGreen : consist >= 50 ? dkOrange : dkRed}">${consist.toFixed(0)}%</div>
- <div class="hcard-bar"><div class="hcard-fill" style="width:${consist}%;background:${consist >= 80 ? '#4caf50' : consist >= 50 ? '#ffa726' : '#ef5350'}"></div></div>
+ <div class="hcard-bar"><div class="hcard-fill" style="width:${consist}%;background:${corConsist}"></div></div>
  <div class="hcard-note">${mesComInv} de ${mesComDados} meses com investimento registrado</div>
  </div></div>
- <div class="hcard"><div class="hcard-ico"></div><div class="hcard-body">
+ <div class="hcard"><div class="hcard-ico" style="background:#42a5f5">${icoMedia}</div><div class="hcard-body">
  <div class="hcard-lbl">Média Mensal de Gastos</div>
  <div class="hcard-val">${fmt(mediaMensal)}</div>
- <div class="hcard-bar"><div class="hcard-fill" style="width:${s.ent >0 ? c(mediaMensal / (s.ent / mesComDados) * 100) : 0}%;background:#9fc5e8"></div></div>
+ <div class="hcard-bar"><div class="hcard-fill" style="width:${s.ent >0 ? c(mediaMensal / (s.ent / mesComDados) * 100) : 0}%;background:#42a5f5"></div></div>
  <div class="hcard-note">Total de ${fmt(s.saidas)} em ${mesComDados} meses com dados</div>
  </div></div>
- <div class="hcard"><div class="hcard-ico"></div><div class="hcard-body">
+ <div class="hcard"><div class="hcard-ico" style="background:#ec407a">${icoFixoVar}</div><div class="hcard-body">
  <div class="hcard-lbl">Fixo vs Variável</div>
  <div class="hcard-val">${s.saidas >0 ? (s.gf / s.saidas * 100).toFixed(0) + '% fixo' : '—'}</div>
- <div class="hcard-bar"><div class="hcard-fill" style="width:${s.saidas >0 ? c(s.gf / s.saidas * 100) : 0}%;background:#ea9999"></div></div>
+ <div class="hcard-bar"><div class="hcard-fill" style="width:${s.saidas >0 ? c(s.gf / s.saidas * 100) : 0}%;background:#ec407a"></div></div>
  <div class="hcard-note">GF: ${fmt(s.gf)} · GV: ${fmt(s.gv)}</div>
  </div></div>
  `;
@@ -6571,22 +7062,28 @@
  const needs = s.ent >0 ? s.gf / s.ent * 100 : 0;
  const wants = s.ent >0 ? s.gv / s.ent * 100 : 0;
  const saves = s.ent >0 ? s.inv / s.ent * 100 : 0;
+ const icoNeeds = `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`;
+ const icoWants = `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+ const icoSaves = `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>`;
  e('rule-cards').innerHTML = `
- <div class="rule-card" style="border-top-color:#ea9999">
+ <div class="rule-card" style="--rule-accent:#ef5350;--rule-accent-l:rgba(239,83,80,.15)">
+ <div class="rule-ico" style="background:#ef5350">${icoNeeds}</div>
  <div class="rule-lbl">Necessidades</div>
- <div class="rule-pct" style="color:#c62828">${needs.toFixed(1)}%</div>
+ <div class="rule-pct" style="color:${dkRed}">${needs.toFixed(1)}%</div>
  <div class="rule-ideal">Ideal: 50%</div>
  <div class="rule-val">${fmt(s.gf)}</div>
  </div>
- <div class="rule-card" style="border-top-color:#f9cb9c">
+ <div class="rule-card" style="--rule-accent:#ffa726;--rule-accent-l:rgba(255,167,38,.15)">
+ <div class="rule-ico" style="background:#ffa726">${icoWants}</div>
  <div class="rule-lbl">Desejos</div>
- <div class="rule-pct" style="color:#e65100">${wants.toFixed(1)}%</div>
+ <div class="rule-pct" style="color:${dkOrange}">${wants.toFixed(1)}%</div>
  <div class="rule-ideal">Ideal: 30%</div>
  <div class="rule-val">${fmt(s.gv)}</div>
  </div>
- <div class="rule-card" style="border-top-color:#93c47d">
+ <div class="rule-card" style="--rule-accent:#4caf50;--rule-accent-l:rgba(76,175,80,.15)">
+ <div class="rule-ico" style="background:#4caf50">${icoSaves}</div>
  <div class="rule-lbl">Investimentos</div>
- <div class="rule-pct" style="color:#2e7d32">${saves.toFixed(1)}%</div>
+ <div class="rule-pct" style="color:${dkGreen}">${saves.toFixed(1)}%</div>
  <div class="rule-ideal">Ideal: 20%</div>
  <div class="rule-val">${fmt(s.inv)}</div>
  </div>
@@ -6976,11 +7473,13 @@
  <div class="yp-title">Selecionar Ano</div>
  <div class="year-pick-grid">
  ${ys.map(y => `<div class="year-pick-item ${y === ano ? 'active' : ''}" onclick="selectYearPicker(${y})">${y}</div>`).join('')}
+ ${!ys.includes(ano) ? `<div class="year-pick-item active">${ano}</div>` : ''}
  </div>
  <div class="year-pick-add">
- <input class="year-pick-input" id="ypNewYear" type="number" min="2000" max="2100" placeholder="Novo ano..." onkeydown="if(event.key==='Enter')addYearFromPicker()">
- <button class="btn btn-g btn-sm" onclick="addYearFromPicker()">+ Criar</button>
+ <input class="year-pick-input" id="ypNewYear" type="number" min="2000" max="2100" placeholder="Ir para o ano..." onkeydown="if(event.key==='Enter')addYearFromPicker()">
+ <button class="btn btn-g btn-sm" onclick="addYearFromPicker()">Ir</button>
  </div>
+ <div style="font-size:11px;color:var(--text-l);padding:6px 4px 0;line-height:1.4">Você pode navegar livremente por qualquer ano. Ele só aparece nesta lista quando tiver algum dado salvo.</div>
  `;
  }
 
@@ -6997,12 +7496,10 @@
  if (!inp) return;
  const y = parseInt(inp.value);
  if (!y || y < 2000 || y >2100) { toast('Ano inválido'); return; }
- const cur = getYears();
- if (cur.includes(y)) { selectYearPicker(y); return; }
- _addYear(y, cur);
  const p = e('yearPicker'), ch = e('ypChevron');
  if (p) p.classList.remove('open');
  if (ch) ch.style.transform = '';
+ changeYear(y);
  }
 
  // ═══════════════════════════════════════════════
@@ -8434,24 +8931,62 @@ function confirmFinLimparTudo() {
  toast('Cobrança excluída.');
  }
 
+ let cobParcelaEditIdx = null;
+
  function openCobDetalheModal(id) {
- const lista = loadCobrancas();
- const c = lista.find(x =>x.id === id);
- if (!c) return;
- e('modal-title').textContent = `Parcelas · ${c.pessoa}`;
- e('modal-body').innerHTML = `<div style="max-height:360px;overflow-y:auto">
- ${c.parcelas.map((p, i) => `<div class="cob-parcela-row">
- <span class="cob-parcela-num">${p.numero}/${c.parcelas.length}</span>
- <span class="cob-parcela-data">${fmtDataBr(p.data)}</span>
- <span class="cob-parcela-val">${fmt(p.valor)}</span>
- <span class="td-pago ${p.pago ? 'sim' : 'nao'}" style="cursor:pointer" onclick="toggleCobParcela('${c.id}',${i})">${p.pago ? 'Recebido' : 'Pendente'}</span>
- </div>`).join('')}
- </div>`;
+ cobParcelaEditIdx = null;
+ renderCobDetalheModalBody(id);
  const box = e('modal-box');
  box.dataset.tipo = 'cob-detalhe';
  modalTipo = 'cob-detalhe'; modalEditId = null;
  e('overlay').classList.add('open');
  divideModalBtn('Fechar');
+ }
+
+ function renderCobDetalheModalBody(id) {
+ const lista = loadCobrancas();
+ const c = lista.find(x =>x.id === id);
+ if (!c) return;
+ e('modal-title').textContent = `Parcelas · ${c.pessoa}`;
+ e('modal-body').innerHTML = `<div style="max-height:360px;overflow-y:auto">
+ ${c.parcelas.map((p, i) => {
+ const editando = cobParcelaEditIdx === i;
+ return `<div class="cob-parcela-row">
+ <span class="cob-parcela-num">${p.numero}/${c.parcelas.length}</span>
+ <span class="cob-parcela-data">${fmtDataBr(p.data)}</span>
+ <div class="cob-parcela-val-wrap">
+ ${editando ? `
+ <input id="cob-parcela-edit-input" class="cob-parcela-edit-inp" type="text" value="${String(p.valor).replace('.', ',')}" onkeydown="if(event.key==='Enter'){saveCobParcelaValor('${c.id}',${i})}if(event.key==='Escape'){cobParcelaEditIdx=null;renderCobDetalheModalBody('${c.id}')}">
+ <button class="btn-icon btn-edit" title="Salvar" onclick="saveCobParcelaValor('${c.id}',${i})"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+ ` : `
+ <span class="cob-parcela-val">${fmt(p.valor)}</span>
+ ${p.pago ? '' : `<button class="btn-icon btn-edit" title="Editar valor desta parcela" onclick="cobParcelaEditIdx=${i};renderCobDetalheModalBody('${c.id}')">${ICO_EDIT}</button>`}
+ `}
+ </div>
+ <span class="td-pago ${p.pago ? 'sim' : 'nao'}" style="cursor:pointer" onclick="toggleCobParcela('${c.id}',${i})">${p.pago ? 'Recebido' : 'Pendente'}</span>
+ </div>`;
+ }).join('')}
+ </div>`;
+ if (cobParcelaEditIdx !== null) {
+ const inp = e('cob-parcela-edit-input');
+ if (inp) { inp.focus(); inp.select(); }
+ }
+ }
+
+ function saveCobParcelaValor(id, idx) {
+ const input = e('cob-parcela-edit-input');
+ if (!input) return;
+ const val = parseFloat(input.value.replace(/\./g, '').replace(',', '.'));
+ if (!val || val <= 0) { toast('Valor inválido.'); return; }
+ const lista = loadCobrancas();
+ const c = lista.find(x =>x.id === id);
+ if (!c) return;
+ c.parcelas[idx].valor = val;
+ saveCobrancas(lista);
+ cobParcelaEditIdx = null;
+ renderCobDetalheModalBody(id);
+ renderCobraAi();
+ toast('Valor da parcela atualizado!');
  }
 
  function toggleCobParcela(id, idx) {
@@ -8462,7 +8997,7 @@ function confirmFinLimparTudo() {
  p.pago = !p.pago;
  p.dataPago = p.pago ? new Date().toISOString().slice(0, 10) : '';
  saveCobrancas(lista);
- openCobDetalheModal(id);
+ renderCobDetalheModalBody(id);
  renderCobraAi();
  }
 
@@ -8677,7 +9212,7 @@ function confirmFinLimparTudo() {
  <button class="btn btn-g btn-sm" onclick="divideAddConta()" ${!ev.membros.length ? 'disabled title="Adicione membros primeiro"' : ''}>+ Adicionar Conta</button>
  </div>
  ${ev.contas.length ? `
- <div class="table-wrap">
+ <div class="table-wrap has-mobile-list">
  <table>
  <thead><tr><th>Descrição</th><th>Data</th><th>Valor</th><th>Quem pagou</th><th>Participantes</th><th style="text-align:center">Ações</th></tr></thead>
  <tbody>
@@ -8694,14 +9229,41 @@ function confirmFinLimparTudo() {
  </tr>`).join('')}
  </tbody>
  </table>
- </div>` : '<div style="color:var(--text-l);font-size:13px;text-align:center;padding:20px">Nenhuma conta ainda</div>'}
+ </div>
+ <div class="mobile-gasto-list">
+ ${ev.contas.map(c => `<div class="gasto-card" onclick="divideEditConta('${c.id}')">
+ <div class="gasto-card-top">
+ <div class="gasto-card-cat">
+ <div class="gasto-card-avatar">${(c.descricao || '?').charAt(0)}</div>
+ <div style="min-width:0">
+ <div class="gasto-card-desc">${c.descricao}</div>
+ <div class="gasto-card-sub">${c.data || '—'} · Pago por <strong>${c.pagoPor}</strong></div>
+ <div class="gasto-card-sub">Participantes: ${c.participantes.join(', ')}</div>
+ </div>
+ </div>
+ <div class="gasto-card-val">${fmt(c.valor)}</div>
+ </div>
+ <div class="gasto-card-bottom">
+ <span></span>
+ <div class="gasto-card-actions">
+ <button class="btn-icon btn-edit" onclick="event.stopPropagation();divideEditConta('${c.id}')" title="Editar"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button>
+ <button class="btn-icon btn-del" onclick="event.stopPropagation();divideRemoverConta('${c.id}')" title="Excluir"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>
+ </div>
+ </div>
+ </div>`).join('')}
+ <div class="gasto-card" style="display:flex;align-items:center;justify-content:space-between;background:var(--green-l);border-color:transparent;cursor:default" onclick="event.stopPropagation()">
+ <span style="font-weight:700;font-size:13px">Total</span>
+ <span style="font-weight:800;font-size:15px">${fmt(total)}</span>
+ </div>
+ </div>
+ ` : '<div style="color:var(--text-l);font-size:13px;text-align:center;padding:20px">Nenhuma conta ainda</div>'}
  </div>
 
  <!-- Resumo -->
  <div class="section">
  <div class="sec-title" style="margin-bottom:16px">Resumo — Quem deve pagar quem</div>
  ${!ev.membros.length || !ev.contas.length ? '<div style="color:var(--text-l);font-size:13px;text-align:center;padding:10px">Adicione membros e contas para ver o resumo</div>' : `
- <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:20px">
+ <div class="dv-saldo-grid">
  ${ev.membros.map(m => {
  const s = saldos[m] || 0;
  // check if all debts from this member have been marked paid
@@ -8709,10 +9271,15 @@ function confirmFinLimparTudo() {
  const debitosPendentes = dividas.filter(d =>d.de === m && !pagoMap[d.de + '→' + d.para]);
  const recebiveisPendentes = dividas.filter(d =>d.para === m && !pagoMap[d.de + '→' + d.para]);
  const tudo_pago = (debitosPendentes.length === 0 && recebiveisPendentes.length === 0 && (dividas.filter(d =>d.de === m || d.para === m).length >0 || Math.abs(s) < 0.01));
- return `<div style="background:var(--bg);border-radius:10px;padding:14px;text-align:center;border-top:3px solid ${s >0.01 ? 'var(--green)' : s < -0.01 ? 'var(--red)' : '#9e9e9e'}">
- <div style="font-weight:700;font-size:14px;margin-bottom:6px">${m}</div>
- <div style="font-size:17px;font-weight:800;color:${s >0.01 ? 'var(--green-d)' : s < -0.01 ? 'var(--red-d)' : '#9e9e9e'}">${s >0.01 ? '+' : ''}${fmt(Math.abs(s))}</div>
- <div style="font-size:11px;color:var(--text-l);margin-top:3px">${s >0.01 ? 'a receber' : s < -0.01 ? 'a pagar' : 'quitado'}</div>
+ const cls = s >0.01 ? 'pos' : s < -0.01 ? 'neg' : 'zero';
+ const label = s >0.01 ? 'a receber' : s < -0.01 ? 'a pagar' : 'quitado';
+ return `<div class="dv-saldo-card ${cls}">
+ <div class="dv-saldo-avatar">${m.charAt(0)}</div>
+ <div class="dv-saldo-body">
+ <div class="dv-saldo-nome">${m}</div>
+ <div class="dv-saldo-val">${s >0.01 ? '+' : ''}${fmt(Math.abs(s))}</div>
+ <div class="dv-saldo-tag">${label}</div>
+ </div>
  </div>`;
  }).join('')}
  </div>
@@ -8721,14 +9288,13 @@ function confirmFinLimparTudo() {
  ${dividas.map(d => {
  const key = d.de + '→' + d.para;
  const isPago = !!(ev.pagos || {})[key];
- return `<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg);border-radius:10px;margin-bottom:8px;flex-wrap:wrap;${isPago ? 'opacity:.55;' : ''}">
- <span style="font-weight:700;color:var(--red-d);${isPago ? 'text-decoration:line-through;' : ''}">${d.de}</span>
- <span style="color:var(--text-l)">→</span>
- <span style="font-weight:800;color:var(--blue-d)">${fmt(d.valor)}</span>
- <span style="color:var(--text-l)">→</span>
- <span style="font-weight:700;color:var(--green-d);${isPago ? 'text-decoration:line-through;' : ''}">${d.para}</span>
- <button onclick="divideToglePago('${ev.id}','${d.de}','${d.para}')" style="margin-left:auto;padding:4px 12px;border-radius:20px;border:none;cursor:pointer;font-size:12px;font-weight:700;transition:all .15s;
- ${isPago ? 'background:#e8f5e9;color:#2e7d32' : 'background:#ffebee;color:#c62828'}">
+ return `<div class="dv-transf-row" style="${isPago ? 'opacity:.55' : ''}">
+ <span class="dv-transf-pessoa dv-transf-de" style="${isPago ? 'text-decoration:line-through' : ''}">${d.de}</span>
+ <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--text-l)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+ <span style="font-weight:800;color:var(--blue-d);font-size:13.5px">${fmt(d.valor)}</span>
+ <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--text-l)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+ <span class="dv-transf-pessoa dv-transf-para" style="${isPago ? 'text-decoration:line-through' : ''}">${d.para}</span>
+ <button onclick="divideToglePago('${ev.id}','${d.de}','${d.para}')" class="dv-transf-btn" style="${isPago ? 'background:rgba(76,175,80,.15);color:var(--green-d)' : 'background:rgba(239,83,80,.15);color:var(--red-d)'}">
  ${isPago ? 'Pago' : 'Marcar pago'}
  </button>
  </div>`;
