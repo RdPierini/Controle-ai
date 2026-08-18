@@ -2806,17 +2806,17 @@
  position: fixed;
  inset: 0;
  background:
- radial-gradient(circle at 50% 0%, rgba(76, 214, 113, .10) 0%, rgba(76, 214, 113, 0) 45%),
+ radial-gradient(120% 60% at 50% 0%, rgba(76, 214, 113, .20) 0%, rgba(76, 214, 113, 0) 55%),
  linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px),
  linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px),
  #05080a;
  background-size: auto, 42px 42px, 42px 42px, auto;
  z-index: 9999;
  display: flex;
- align-items: center;
+ align-items: flex-start;
  justify-content: center;
  overflow-y: auto;
- padding: 40px 16px
+ padding: 0
  }
 
  #login-screen.hidden {
@@ -2824,22 +2824,23 @@
  }
 
  .landing-wrap {
- max-width: 440px;
+ max-width: 480px;
  width: 100%;
- margin: auto;
- padding: 0 0 24px;
- border-radius: 22px;
- overflow: hidden;
- box-shadow: 0 24px 70px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .06);
- background: #05080a
+ min-height: 100%;
+ margin: 0 auto;
+ padding: 0 0 40px;
+ border-radius: 0;
+ overflow: visible;
+ box-shadow: none;
+ background: none
  }
 
  .landing-hero {
  position: relative;
- background: radial-gradient(120% 100% at 50% 0%, #0f2117 0%, #081210 55%, #05080a 100%);
- padding: 52px 28px 34px;
+ background: none;
+ padding: 56px 24px 34px;
  text-align: center;
- overflow: hidden
+ overflow: visible
  }
 
  .landing-glow {
@@ -2853,11 +2854,20 @@
  pointer-events: none
  }
 
+ .landing-brand-row {
+ display: flex;
+ align-items: center;
+ gap: 12px;
+ justify-content: center;
+ margin-bottom: 14px
+ }
+
  .landing-mark {
  position: relative;
- width: 46px;
- height: 46px;
- margin: 0 auto 14px;
+ width: 40px;
+ height: 40px;
+ margin: 0;
+ flex-shrink: 0;
  opacity: 0;
  animation: landFadeUp .6s ease-out .1s forwards
  }
@@ -2922,7 +2932,7 @@
  position: relative;
  width: 100%;
  height: 90px;
- margin-top: 28px;
+ margin-top: 40px;
  display: block;
  opacity: 0;
  animation: landFadeUp .6s ease-out .36s forwards
@@ -2979,7 +2989,7 @@
  flex-direction: column;
  gap: 0;
  background: #0b0f0d;
- margin: 0 20px;
+ margin: 28px 20px 0;
  border-radius: 14px;
  overflow: hidden;
  transform: translateY(16px);
@@ -3031,6 +3041,10 @@
  line-height: 1.4
  }
 
+ .landing-right {
+ display: contents
+ }
+
  .login-box {
  margin: 22px 20px 0;
  background: transparent;
@@ -3048,6 +3062,88 @@
  .landing-chart-line { stroke-dashoffset: 0 }
  .landing-chart-fill { opacity: 1 }
  .landing-chart-dot { opacity: 1; transform: scale(1) }
+ }
+
+ /* ── Desktop: login em tela cheia, layout de duas colunas ── */
+ @media (min-width: 900px) {
+ #login-screen {
+ padding: 0;
+ align-items: stretch;
+ justify-content: stretch
+ }
+
+ .landing-wrap {
+ max-width: none;
+ width: 100%;
+ min-height: 100vh;
+ margin: 0;
+ border-radius: 0;
+ box-shadow: none;
+ overflow: visible;
+ display: grid;
+ grid-template-columns: 1.05fr 1fr;
+ background: radial-gradient(120% 90% at 28% 20%, #0f2117 0%, #081210 45%, #05080a 75%)
+ }
+
+ .landing-hero {
+ min-height: 100vh;
+ padding: 0 clamp(40px, 6vw, 96px);
+ text-align: left;
+ display: flex;
+ flex-direction: column;
+ align-items: flex-start;
+ justify-content: center;
+ background: none
+ }
+
+ .landing-glow {
+ top: 10%;
+ left: 20%
+ }
+
+ .landing-brand-row {
+ justify-content: flex-start
+ }
+
+ .landing-mark {
+ margin: 0
+ }
+
+ .landing-title {
+ font-size: 44px
+ }
+
+ .landing-sub {
+ margin: 18px 0 0;
+ max-width: 380px;
+ font-size: 15.5px
+ }
+
+ .landing-right {
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ gap: 30px;
+ min-height: 100vh;
+ padding: 64px clamp(32px, 5vw, 80px);
+ background: none;
+ border-left: 1px solid rgba(255, 255, 255, .07)
+ }
+
+ .landing-chart {
+ margin-top: 36px;
+ max-width: 420px
+ }
+
+ .landing-features {
+ margin: 0;
+ max-width: 460px
+ }
+
+ .login-box {
+ margin: 0;
+ max-width: 460px
+ }
  }
 
  .icon-box {
@@ -3588,12 +3684,10 @@
  bottom: 8px;
  left: 8px;
  right: 8px;
- background: var(--card-bg, rgba(255, 255, 255, .96));
- backdrop-filter: blur(16px);
- -webkit-backdrop-filter: blur(16px);
- border: 1.5px solid var(--border);
- border-radius: 20px;
- box-shadow: 0 8px 28px rgba(0, 0, 0, .12);
+ background: linear-gradient(180deg, #2e7d32, #1b5e20);
+ border: none;
+ border-radius: 22px;
+ box-shadow: 0 10px 28px rgba(0, 0, 0, .28);
  z-index: 190;
  padding: 6px max(6px, env(safe-area-inset-bottom)) 6px 6px
  }
@@ -3603,14 +3697,14 @@
  display: flex;
  flex-direction: column;
  align-items: center;
- gap: 2px;
- padding: 7px 4px;
+ gap: 3px;
+ padding: 8px 4px;
  border: none;
  background: none;
  cursor: pointer;
  font-size: 10px;
  font-weight: 600;
- color: var(--text-l);
+ color: rgba(255, 255, 255, .75);
  transition: all .2s;
  line-height: 1.2;
  border-radius: 14px;
@@ -3625,7 +3719,7 @@
 
  .bnav-btn.active {
  color: #fff;
- background: var(--green-solid)
+ background: rgba(255, 255, 255, .14)
  }
 
  .bnav-btn.active .bnav-ico {
@@ -3633,27 +3727,36 @@
  }
 
  .bnav-main {
- margin-top: -26px;
- width: 54px;
- height: 54px;
- flex: 0 0 54px;
+ margin-top: -22px;
+ width: 58px;
+ flex: 0 0 58px;
+ background: none;
+ padding: 0;
+ gap: 4px;
+ border-radius: 0
+ }
+
+ .bnav-main.active,
+ .bnav-main:hover {
+ background: none
+ }
+
+ .bnav-main-circle {
+ width: 52px;
+ height: 52px;
  border-radius: 50%;
  background: #fff;
- border: 2.5px solid var(--green);
- color: var(--green);
- box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
+ color: #1b5e20;
+ display: flex;
+ align-items: center;
  justify-content: center;
- padding: 0;
- font-size: 9px
+ box-shadow: 0 6px 16px rgba(0, 0, 0, .3);
+ flex-shrink: 0
  }
 
- .bnav-main .bnav-ico {
- font-size: 22px
- }
-
- .bnav-main.active {
- background: var(--green-solid);
- border-color: var(--green);
+ .bnav-main-lbl {
+ font-size: 10px;
+ font-weight: 700;
  color: #fff
  }
 
@@ -3737,6 +3840,58 @@
  display: block
  }
 
+ .mais-list-row {
+ display: flex;
+ align-items: center;
+ gap: 14px;
+ padding: 14px 4px;
+ border-bottom: 1px solid var(--border);
+ cursor: pointer;
+ background: none;
+ border-left: none;
+ border-right: none;
+ border-top: none;
+ width: 100%;
+ text-align: left;
+ font: inherit;
+ color: inherit
+ }
+
+ .mais-list-row:last-child { border-bottom: none }
+
+ .mais-list-ico {
+ width: 22px;
+ height: 22px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ color: var(--text-l);
+ flex-shrink: 0
+ }
+
+ .mais-list-lbl {
+ flex: 1;
+ font-size: 14.5px;
+ font-weight: 600;
+ color: var(--text)
+ }
+
+ .mais-list-chev {
+ color: var(--text-l);
+ flex-shrink: 0
+ }
+
+ .mais-list-sec {
+ font-size: 11px;
+ font-weight: 700;
+ color: var(--text-l);
+ text-transform: uppercase;
+ letter-spacing: .6px;
+ padding: 16px 4px 6px
+ }
+
+ .mais-list-sec:first-child { padding-top: 4px }
+
  /* ── Saúde Financeira ── */
  .hgrid {
  display: grid;
@@ -3755,6 +3910,35 @@
  .hgrid {
  grid-template-columns: 1fr
  }
+ }
+
+ .hgrid-5 {
+ grid-template-columns: repeat(5, 1fr)
+ }
+
+ @media(max-width:1100px) {
+ .hgrid-5 {
+ grid-template-columns: repeat(3, 1fr)
+ }
+ }
+
+ @media(max-width:640px) {
+ .hgrid-5 {
+ grid-template-columns: repeat(2, 1fr)
+ }
+ }
+
+ @media(max-width:480px) {
+ .hgrid-5 {
+ grid-template-columns: 1fr
+ }
+ .hgrid-5 .hcard {
+ padding: 12px 14px
+ }
+ }
+
+ .hgrid-center .hcard {
+ align-items: center
  }
 
  .hcard {
@@ -3989,7 +4173,7 @@
  }
 
  .mobile-topbar {
- display: flex
+ display: none
  }
 
  .bottom-nav {
@@ -4059,20 +4243,6 @@
  /* Dark mode — new elements */
  body.dark hr.snav-div {
  border-color: rgba(255, 255, 255, .18)
- }
-
- body.dark .bottom-nav {
- background: rgba(13, 21, 18, .95);
- border-color: #1c2a22
- }
-
- body.dark .bnav-btn {
- color: #777
- }
-
- body.dark .bnav-btn.active {
- color: #fff;
- background: #4caf50
  }
 
  body.dark .month-sheet {
@@ -4412,10 +4582,12 @@
  <div class="landing-wrap">
  <div class="landing-hero">
  <div class="landing-glow"></div>
+ <div class="landing-brand-row">
  <div class="landing-mark">
  <img src="icon-transparent.png" alt="">
  </div>
  <div class="landing-title">Controle<span class="landing-title-accent">Aí</span></div>
+ </div>
  <div class="landing-tag">Seu dinheiro<span class="landing-dot">,</span><span class="landing-tag-accent">seu controle</span></div>
  <div class="landing-sub">O painel completo das suas finanças: contas, rendimentos e financiamentos, num só lugar.</div>
  <svg class="landing-chart" viewBox="0 0 400 130" preserveAspectRatio="none" aria-hidden="true">
@@ -4435,6 +4607,7 @@
  <circle class="landing-chart-dot" cx="400" cy="10" r="5"/>
  </svg>
  </div>
+ <div class="landing-right">
  <div class="landing-features">
  <div class="landing-feat">
  <div class="landing-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M12 20V4"/><path d="M20 20v-7"/></svg></div>
@@ -4455,6 +4628,7 @@
  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='%23EA4335' d='M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z'/%3E%3Cpath fill='%234285F4' d='M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z'/%3E%3Cpath fill='%23FBBC05' d='M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z'/%3E%3Cpath fill='%2334A853' d='M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z'/%3E%3C/svg%3E">Entrar com Google
  </button>
  <div class="login-status" id="login-status">Carregando...</div>
+ </div>
  </div>
  </div>
  </div>
@@ -4581,7 +4755,7 @@
  <button class="dash-mes-pick-btn" onclick="dashNavMes(1)" title="Próximo mês">▶</button>
  </div>
  <div class="add-tx-wrap">
- <button class="btn btn-g btn-sm" onclick="toggleAddTxMenu()">+ Adicionar transação</button>>
+ <button class="btn btn-g btn-sm" onclick="toggleAddTxMenu()">+ Adicionar transação</button>
  <div class="add-tx-menu" id="addTxMenu">
  <button onclick="quickAddTx('ent')">Entrada</button>
  <button onclick="quickAddTx('gf')">Gasto Fixo</button>
@@ -4768,7 +4942,7 @@
  </div>
  <button class="btn btn-outline btn-sm" onclick="openMetasModal()">Editar Metas</button>
  </div>
- <div class="cards" id="metas-resumo-cards"></div>
+ <div class="hgrid hgrid-5 hgrid-center" id="metas-resumo-cards"></div>
  </div>
  <div class="section">
  <div class="sec-title" style="margin-bottom:12px">Progresso por Mês</div>
@@ -5025,14 +5199,22 @@
 
  <!-- BOTTOM NAV (mobile) -->
  <nav class="bottom-nav" id="bottomNav">
- <button class="bnav-btn" id="bnav-mes" onclick="openMonthSheet()"><span class="bnav-ico"></span>Meses</button>
- <button class="bnav-btn" data-p="investimentos" onclick="showPage('investimentos')"><span
- class="bnav-ico"></span>Invest.</button>
- <button class="bnav-btn bnav-main active" data-p="dashboard" onclick="showPage('dashboard')"><span
- class="bnav-ico"></span>Início</button>
- <button class="bnav-btn" data-p="saude" onclick="showPage('saude')"><span class="bnav-ico"></span>Saúde</button>
- <button class="bnav-btn" data-p="divide" onclick="showPage('divide')"><span
- class="bnav-ico"></span>Divide</button>
+ <button class="bnav-btn" id="bnav-mes" onclick="openMonthSheet()">
+ <span class="bnav-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>Meses
+ </button>
+ <button class="bnav-btn" data-p="investimentos" onclick="showPage('investimentos')">
+ <span class="bnav-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>Invest.
+ </button>
+ <button class="bnav-btn bnav-main active" data-p="dashboard" onclick="showPage('dashboard')">
+ <span class="bnav-main-circle"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg></span>
+ <span class="bnav-main-lbl">Início</span>
+ </button>
+ <button class="bnav-btn" data-p="divide" onclick="showPage('divide')">
+ <span class="bnav-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="4"/><circle cx="16" cy="8" r="4"/><path d="M2 20c0-3.5 2.5-6 6-6s6 2.5 6 6"/><path d="M10 20c0-3.5 2.5-6 6-6s6 2.5 6 6"/></svg></span>Divide
+ </button>
+ <button class="bnav-btn" data-p="mais" onclick="openMaisSheet()">
+ <span class="bnav-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>Mais
+ </button>
  </nav>
 
  <!-- MONTH SHEET (mobile) -->
@@ -5043,7 +5225,47 @@
  </div>
  <div class="ms-grid" id="ms-grid"></div>
  </div>
- <div class="ms-overlay" id="msOverlay" onclick="closeMonthSheet()"></div>
+ <div class="ms-overlay" id="msOverlay" onclick="closeMonthSheet();closeMaisSheet()"></div>
+
+ <!-- MAIS SHEET (mobile) -->
+ <div class="month-sheet" id="maisSheet" style="padding-bottom:100px">
+ <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+ <div class="ms-title" style="margin-bottom:0">Mais</div>
+ <button onclick="closeMaisSheet()" style="background:var(--gray);border:none;border-radius:50%;width:32px;height:32px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-l)">✕</button>
+ </div>
+ <div class="mais-list-sec">Módulos</div>
+ <button class="mais-list-row" onclick="closeMaisSheet();showPage('financiamento')">
+ <span class="mais-list-ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h1M9 13h1M14 9h1M14 13h1"/></svg></span>
+ <span class="mais-list-lbl">Financia Aí</span>
+ <span class="mais-list-chev">›</span>
+ </button>
+ <button class="mais-list-row" onclick="closeMaisSheet();showPage('cobra')">
+ <span class="mais-list-ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg></span>
+ <span class="mais-list-lbl">Cobra Aí</span>
+ <span class="mais-list-chev">›</span>
+ </button>
+ <button class="mais-list-row" onclick="closeMaisSheet();showPage('notas')">
+ <span class="mais-list-ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg></span>
+ <span class="mais-list-lbl">Anote Aí</span>
+ <span class="mais-list-chev">›</span>
+ </button>
+ <button class="mais-list-row" onclick="closeMaisSheet();showPage('saude')">
+ <span class="mais-list-ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+ <span class="mais-list-lbl">Saúde Financeira</span>
+ <span class="mais-list-chev">›</span>
+ </button>
+ <div class="mais-list-sec">Conta</div>
+ <button class="mais-list-row" onclick="closeMaisSheet();showPage('config')">
+ <span class="mais-list-ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+ <span class="mais-list-lbl">Configurações</span>
+ <span class="mais-list-chev">›</span>
+ </button>
+ <button class="mais-list-row" onclick="toggleDark();updateMaisSheetDarkLabel()">
+ <span class="mais-list-ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+ <span class="mais-list-lbl" id="mais-dark-lbl">Modo Escuro</span>
+ <span class="mais-list-chev">›</span>
+ </button>
+ </div>
 
  <!-- YEAR SHEET (mobile) -->
  <div class="year-sheet" id="yearSheet">
@@ -5684,6 +5906,19 @@
  e('monthSheet').classList.remove('open');
  e('msOverlay').classList.remove('open');
  }
+ function openMaisSheet() {
+ updateMaisSheetDarkLabel();
+ e('maisSheet').classList.add('open');
+ e('msOverlay').classList.add('open');
+ }
+ function closeMaisSheet() {
+ e('maisSheet').classList.remove('open');
+ e('msOverlay').classList.remove('open');
+ }
+ function updateMaisSheetDarkLabel() {
+ const lbl = e('mais-dark-lbl');
+ if (lbl) lbl.textContent = document.body.classList.contains('dark') ? 'Modo Claro' : 'Modo Escuro';
+ }
  function openYearSheet() {
  const ys = getYears();
  e('ys-grid').innerHTML = ys.map(y => `<div class="ys-btn ${y === ano ? 'active' : ''}" onclick="selectYearSheet(${y})">${y}</div>`).join('');
@@ -5716,6 +5951,10 @@
  if (sb) sb.classList.add('active');
  const bb = document.querySelector(`.bnav-btn[data-p="${p}"]`);
  if (bb) bb.classList.add('active');
+ else if (['financiamento', 'cobra', 'notas', 'saude', 'config'].includes(p)) {
+ const mb = document.querySelector('.bnav-btn[data-p="mais"]');
+ if (mb) mb.classList.add('active');
+ }
  }
 
  function showPage(p) {
@@ -6702,7 +6941,8 @@
  let totalMeta = 0, totalInv = 0;
  const mesesComMeta = MESES.filter(m => (d.metasInvestimento[m] || 0) >0).length;
  let mesesBatidos = 0;
- const monthCores = ['#2e7d32', '#1565c0', '#6a1b9a', '#c62828', '#e65100', '#00695c', '#283593', '#ad1457', '#4e342e', '#00838f', '#558b2f', '#f57f17'];
+ const hojeAno = HOJE.getFullYear();
+ const hojeMesIdx = HOJE.getMonth();
  const goalCards = MESES.map((m, i) => {
  const c = calcMes(d, m);
  const meta = d.metasInvestimento[m] || 0;
@@ -6712,14 +6952,15 @@
  totalMeta += meta; totalInv += inv;
  if (meta >0 && inv >= meta) mesesBatidos++;
  const atingiu = meta >0 && inv >= meta;
- const cor = monthCores[i];
+ const isFuturo = (ano >hojeAno) || (ano === hojeAno && i >hojeMesIdx);
+ const cor = atingiu ? '#4caf50' : (meta === 0 || isFuturo) ? '#9e9e9e' : '#ef5350';
  const isMesAtual = m === invMesSel;
  return `<div class="hcard" onclick="goInvMes('${m}')" style="cursor:pointer;${isMesAtual ? `outline:2px solid ${cor}` : ''}">
- <div class="hcard-ico hcard-ico-status" style="background:${atingiu ? '#4caf50' : meta === 0 ? 'var(--gray)' : cor}">${atingiu ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' : ''}</div>
+ <div class="hcard-ico hcard-ico-status" style="background:${cor}">${atingiu ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' : ''}</div>
  <div class="hcard-body">
  <div class="hcard-lbl">${m}</div>
  <div class="hcard-val" style="color:${cor}">${fmt(inv)}</div>
- <div class="hcard-bar"><div class="hcard-fill" style="width:${pct}%;background:${atingiu ? '#4caf50' : cor}"></div></div>
+ <div class="hcard-bar"><div class="hcard-fill" style="width:${pct}%;background:${cor}"></div></div>
  <div class="hcard-note">Meta: ${fmt(meta)} ${meta >0 ? `· ${fmtSigned(diff)}` : ''}</div>
  </div>
  </div>`;
@@ -6727,12 +6968,36 @@
  e('metas-grid').innerHTML = goalCards;
 
  const pctAnual = totalMeta >0 ? (totalInv / totalMeta * 100) : 0;
+ const diffAnual = totalInv - totalMeta;
+ const isDarkInv = document.body.classList.contains('dark');
+ const invDkGreen = isDarkInv ? '#81c784' : '#2e7d32';
+ const invDkRed = isDarkInv ? '#ef9a9a' : '#c62828';
+ const icoTarget = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`;
+ const icoInvAno = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>`;
+ const icoDiff = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/>${diffAnual >= 0 ? '<polyline points="12 5 19 12 12 19"/>' : '<polyline points="12 19 5 12 12 5"/>'}</svg>`;
+ const icoPct = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>`;
+ const icoBatidos = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 15 11 17 15 13"/></svg>`;
  e('metas-resumo-cards').innerHTML = `
- <div class="card gray"><div class="card-label">Meta do Ano</div><div class="card-value">${fmt(totalMeta)}</div></div>
- <div class="card blue"><div class="card-label">Investido no Ano</div><div class="card-value">${fmt(totalInv)}</div></div>
- <div class="card ${totalInv - totalMeta >= 0 ? 'green' : 'red'}"><div class="card-label">Δ Diferença</div><div class="card-value">${fmtSigned(totalInv - totalMeta)}</div></div>
- <div class="card blue"><div class="card-label"> % da Meta Anual</div><div class="card-value">${pctAnual.toFixed(0)}%</div></div>
- <div class="card green"><div class="card-label">Meses Batidos</div><div class="card-value">${mesesBatidos}/${mesesComMeta || 12}</div></div>
+ <div class="hcard"><div class="hcard-ico" style="background:#78909c">${icoTarget}</div><div class="hcard-body">
+ <div class="hcard-lbl">Meta do Ano</div>
+ <div class="hcard-val">${fmt(totalMeta)}</div>
+ </div></div>
+ <div class="hcard"><div class="hcard-ico" style="background:#1976d2">${icoInvAno}</div><div class="hcard-body">
+ <div class="hcard-lbl">Investido no Ano</div>
+ <div class="hcard-val">${fmt(totalInv)}</div>
+ </div></div>
+ <div class="hcard"><div class="hcard-ico" style="background:${diffAnual >= 0 ? '#4caf50' : '#ef5350'}">${icoDiff}</div><div class="hcard-body">
+ <div class="hcard-lbl">Δ Diferença</div>
+ <div class="hcard-val" style="color:${diffAnual >= 0 ? invDkGreen : invDkRed}">${fmtSigned(diffAnual)}</div>
+ </div></div>
+ <div class="hcard"><div class="hcard-ico" style="background:#1976d2">${icoPct}</div><div class="hcard-body">
+ <div class="hcard-lbl">% da Meta Anual</div>
+ <div class="hcard-val">${pctAnual.toFixed(0)}%</div>
+ </div></div>
+ <div class="hcard"><div class="hcard-ico" style="background:#4caf50">${icoBatidos}</div><div class="hcard-body">
+ <div class="hcard-lbl">Meses Batidos</div>
+ <div class="hcard-val">${mesesBatidos}/${mesesComMeta || 12}</div>
+ </div></div>
  `;
 
  renderChartInv(d);
